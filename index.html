@@ -10,36 +10,38 @@
 
   <meta
     name="theme-color"
-    content="#f4f4f0"
-    id="theme-color"
+    content="#f5f5f2"
   >
 
   <meta
     name="description"
-    content="ZXH OFFICIAL MediaFire Downloader — paste a public MediaFire link and get file information."
+    content="ZXH OFFICIAL MediaFire Downloader — lookup MediaFire files, preview file information and access available download links."
   >
 
   <meta
-    name="application-name"
-    content="ZXH MediaFire DL"
+    name="robots"
+    content="index, follow"
   >
 
   <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
+    property="og:title"
+    content="ZXH OFFICIAL — MediaFire Downloader"
   >
 
   <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="default"
+    property="og:description"
+    content="Fast MediaFire file lookup and download access by ZXH OFFICIAL."
   >
 
   <meta
-    name="apple-mobile-web-app-title"
-    content="ZXH MediaFire DL"
+    property="og:type"
+    content="website"
   >
 
-  <title>ZXH OFFICIAL — MediaFire DL</title>
+  <link
+    rel="manifest"
+    href="/manifest.json"
+  >
 
   <link
     rel="preconnect"
@@ -53,512 +55,527 @@
   >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
+  <title>ZXH OFFICIAL — MediaFire Downloader</title>
+
   <style>
-    :root{
-      --bg:#f4f4f0;
-      --bg2:#ffffff;
-      --surface:#ffffff;
-      --surface2:#ededE8;
-      --text:#111111;
-      --muted:#686868;
-      --border:rgba(17,17,17,.12);
-      --border-strong:rgba(17,17,17,.22);
+    /* ==================================================
+       ROOT
+    ================================================== */
 
-      --accent:#111111;
-      --accentText:#ffffff;
-
-      --success:#138a4b;
-      --danger:#d92d20;
-
-      --shadow:
-        0 24px 70px rgba(0,0,0,.08);
-
-      --radius:28px;
-    }
-
-    html.dark{
-      --bg:#0c0c0c;
-      --bg2:#111111;
-      --surface:#171717;
-      --surface2:#202020;
-      --text:#f5f5f2;
-      --muted:#999999;
-      --border:rgba(255,255,255,.10);
-      --border-strong:rgba(255,255,255,.18);
-
-      --accent:#f5f5f2;
-      --accentText:#111111;
-
-      --success:#38c77b;
-      --danger:#ff6257;
+    :root {
+      --bg: #f5f5f2;
+      --bg-2: #ffffff;
+      --surface: rgba(255,255,255,.82);
+      --surface-solid: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --muted-2: #8a8a8a;
+      --border: rgba(17,17,17,.10);
+      --border-strong: rgba(17,17,17,.18);
+      --accent: #111111;
+      --accent-text: #ffffff;
+      --soft: #eeeeeb;
+      --success: #237a4b;
+      --danger: #b52d2d;
+      --warning: #9a6814;
 
       --shadow:
-        0 28px 90px rgba(0,0,0,.32);
+        0 20px 60px rgba(0,0,0,.07);
+
+      --shadow-soft:
+        0 10px 35px rgba(0,0,0,.05);
+
+      --radius-xl: 38px;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+
+      --max: 1480px;
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
+    html.dark {
+      --bg: #0b0b0b;
+      --bg-2: #111111;
+      --surface: rgba(25,25,25,.88);
+      --surface-solid: #171717;
+      --text: #f5f5f5;
+      --muted: #a3a3a3;
+      --muted-2: #777777;
+      --border: rgba(255,255,255,.10);
+      --border-strong: rgba(255,255,255,.18);
+      --accent: #f5f5f5;
+      --accent-text: #111111;
+      --soft: #202020;
+      --success: #54c785;
+      --danger: #ff7070;
+      --warning: #e0ad55;
+
+      --shadow:
+        0 25px 70px rgba(0,0,0,.30);
+
+      --shadow-soft:
+        0 15px 45px rgba(0,0,0,.20);
     }
 
-    html{
-      scroll-behavior:smooth;
-      background:var(--bg);
+
+    /* ==================================================
+       RESET
+    ================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    body{
-      min-height:100vh;
-      overflow-x:hidden;
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
 
+    body {
+      min-height: 100vh;
       background:
         radial-gradient(
-          circle at 80% 0%,
+          circle at 15% 5%,
           rgba(0,0,0,.035),
-          transparent 34%
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(0,0,0,.025),
+          transparent 30%
         ),
         var(--bg);
 
-      color:var(--text);
-
-      font-family:
-        "Space Grotesk",
-        system-ui,
-        sans-serif;
-
+      color: var(--text);
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
       transition:
-        background .35s ease,
-        color .35s ease;
+        background .3s ease,
+        color .3s ease;
     }
 
-    html.dark body{
+    html.dark body {
       background:
         radial-gradient(
-          circle at 80% 0%,
+          circle at 10% 0%,
           rgba(255,255,255,.035),
-          transparent 34%
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(255,255,255,.025),
+          transparent 30%
         ),
         var(--bg);
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
     }
 
     button,
-    input{
-      font:inherit;
+    input {
+      font: inherit;
     }
 
-    button{
-      border:0;
+    button {
+      cursor: pointer;
     }
 
-    ::selection{
-      background:var(--text);
-      color:var(--bg);
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .noise{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:9999;
-      opacity:.025;
-
-      background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    ::selection {
+      background: var(--text);
+      color: var(--bg);
     }
 
-    .top-line{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:2px;
-      z-index:200;
 
-      background:var(--text);
+    /* ==================================================
+       GLOBAL
+    ================================================== */
 
-      transform-origin:left;
-      transform:scaleX(0);
-
-      transition:transform .15s linear;
-    }
-
-    .container{
-      width:min(1420px,calc(100% - 48px));
-      margin:auto;
-    }
-
-    /* =========================================
-       HEADER
-    ========================================= */
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:100;
-
-      height:78px;
-
-      display:flex;
-      align-items:center;
-
-      background:color-mix(
-        in srgb,
-        var(--bg) 88%,
-        transparent
+    .container {
+      width: min(
+        calc(100% - 40px),
+        var(--max)
       );
 
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-
-      border-bottom:1px solid var(--border);
+      margin-inline: auto;
     }
 
-    .nav{
-      width:min(1420px,calc(100% - 48px));
-      margin:auto;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
 
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:25px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+
+      color: var(--muted);
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      min-width:0;
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
-    .brand-mark{
-      width:42px;
-      height:42px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:12px;
-
-      background:var(--text);
-      color:var(--bg);
-
-      font-size:14px;
-      font-weight:900;
-      letter-spacing:-.05em;
+    .section {
+      padding: 120px 0;
     }
 
-    .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1;
+    .section-heading {
+      max-width: 850px;
+      margin-bottom: 50px;
     }
 
-    .brand-text strong{
-      font-size:14px;
-      letter-spacing:.04em;
+    .section-heading h2 {
+      margin-top: 18px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(42px, 6vw, 88px);
+      line-height: .96;
+      letter-spacing: -.055em;
+      font-weight: 800;
     }
 
-    .brand-text span{
-      margin-top:5px;
-      font-family:"DM Mono",monospace;
-      font-size:9px;
-      letter-spacing:.08em;
-      opacity:.48;
+    .section-heading p {
+      margin-top: 24px;
+      max-width: 680px;
+
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
     }
 
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
+
+    /* ==================================================
+       HEADER
+    ================================================== */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      border-bottom: 1px solid var(--border);
+
+      background:
+        color-mix(
+          in srgb,
+          var(--bg) 86%,
+          transparent
+        );
+
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
-    .nav-btn{
-      min-width:42px;
-      height:42px;
+    .nav {
+      min-height: 82px;
 
-      display:grid;
-      place-items:center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
 
-      border:1px solid var(--border);
-      border-radius:13px;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
 
-      background:var(--surface);
-      color:var(--text);
+    .brand-mark {
+      width: 42px;
+      height: 42px;
 
-      cursor:pointer;
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+      background: var(--accent);
+      color: var(--accent-text);
+
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.08em;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-title {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -.02em;
+    }
+
+    .brand-subtitle {
+      margin-top: 1px;
+
+      color: var(--muted-2);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: var(--surface);
+      color: var(--text);
 
       transition:
         transform .2s ease,
-        background .2s ease;
+        background .2s ease,
+        border-color .2s ease;
     }
 
-    .nav-btn:hover{
-      transform:translateY(-2px);
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
     }
 
-    .theme-icon{
-      font-size:17px;
+    .icon-btn svg {
+      width: 19px;
+      height: 19px;
     }
 
-    /* =========================================
+
+    /* ==================================================
        HERO
-    ========================================= */
+    ================================================== */
 
-    .hero{
-      position:relative;
-
-      min-height:calc(100vh - 78px);
-
-      display:flex;
-      align-items:center;
-
+    .hero {
       padding:
         100px 0
-        120px;
+        75px;
     }
 
-    .hero-grid{
-      display:grid;
+    .hero-grid {
+      display: grid;
       grid-template-columns:
-        minmax(0,1.45fr)
-        minmax(300px,.55fr);
+        minmax(0, 1.35fr)
+        minmax(280px, .65fr);
 
-      gap:70px;
-      align-items:end;
+      gap: 60px;
+      align-items: end;
     }
 
-    .hero-kicker{
-      display:flex;
-      align-items:center;
-      gap:12px;
+    .hero h1 {
+      margin-top: 22px;
 
-      margin-bottom:27px;
+      max-width: 1050px;
 
-      font-family:"DM Mono",monospace;
-      font-size:11px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-
-      opacity:.58;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(58px, 9vw, 145px);
+      line-height: .87;
+      letter-spacing: -.075em;
+      font-weight: 800;
     }
 
-    .hero-kicker i{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--text);
-      display:block;
+    .hero h1 span {
+      color: var(--muted-2);
     }
 
-    .hero h1{
-      max-width:1100px;
+    .hero-description {
+      max-width: 530px;
+      margin-left: auto;
 
-      font-size:
-        clamp(64px,10vw,155px);
-
-      line-height:.84;
-
-      letter-spacing:-.075em;
-
-      font-weight:700;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
     }
 
-    .hero h1 span{
-      display:block;
-      opacity:.38;
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 25px;
     }
 
-    .hero-copy{
-      max-width:530px;
+    .meta-pill {
+      padding: 9px 13px;
 
-      margin-top:42px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
 
-      color:var(--muted);
+      background: var(--surface);
 
-      font-size:
-        clamp(16px,1.7vw,21px);
-
-      line-height:1.65;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .hero-side{
-      padding-bottom:10px;
-    }
 
-    .hero-side-number{
-      font-family:"DM Mono",monospace;
-      font-size:11px;
-      letter-spacing:.12em;
-      opacity:.42;
-      margin-bottom:18px;
-    }
-
-    .hero-side p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:15px;
-    }
-
-    .hero-scroll{
-      position:absolute;
-      bottom:38px;
-      left:50%;
-
-      transform:translateX(-50%);
-
-      font-family:"DM Mono",monospace;
-      font-size:9px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-
-      opacity:.38;
-    }
-
-    /* =========================================
+    /* ==================================================
        MARQUEE
-    ========================================= */
+    ================================================== */
 
-    .marquee{
-      overflow:hidden;
+    .marquee {
+      width: 100%;
+      overflow: hidden;
 
-      border-top:1px solid var(--border);
-      border-bottom:1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
 
-      padding:20px 0;
-
-      white-space:nowrap;
+      background: var(--surface);
     }
 
-    .marquee-track{
-      width:max-content;
+    .marquee-track {
+      width: max-content;
 
-      display:flex;
-      gap:55px;
+      display: flex;
+      align-items: center;
 
-      animation:
-        marquee 26s linear infinite;
+      animation: marquee 26s linear infinite;
     }
 
-    .marquee-item{
-      display:flex;
-      align-items:center;
-      gap:55px;
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 30px;
 
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.1em;
-      text-transform:uppercase;
+      padding: 21px 30px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
-    .marquee-item b{
-      opacity:.25;
+    .marquee-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text);
     }
 
-    @keyframes marquee{
-      from{
-        transform:translateX(0);
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
       }
 
-      to{
-        transform:translateX(-50%);
+      to {
+        transform: translateX(-50%);
       }
     }
 
-    /* =========================================
+
+    /* ==================================================
        ENGINE
-    ========================================= */
+    ================================================== */
 
-    .engine-section{
-      width:100%;
-      padding:clamp(90px,12vw,170px) 0;
+    .engine-section {
+      padding: 85px 0 110px;
     }
 
-    .engine-heading{
-      width:min(100%,1100px);
-      margin:0 auto 55px;
-      padding:0 24px;
+    .engine-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+
+      margin-bottom: 26px;
     }
 
-    .eyebrow{
-      display:inline-block;
+    .engine-title h2 {
+      margin-top: 14px;
 
-      margin-bottom:22px;
-
-      font-family:"DM Mono",monospace;
-      font-size:10px;
-      font-weight:500;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-
-      opacity:.52;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(34px, 5vw, 65px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 800;
     }
 
-    .engine-heading h2{
-      max-width:1000px;
+    .engine-title p {
+      margin-top: 13px;
 
-      font-size:
-        clamp(50px,8vw,112px);
-
-      line-height:.9;
-
-      letter-spacing:-.065em;
+      color: var(--muted);
+      font-size: 15px;
     }
 
-    .engine-heading h2 em{
-      font-style:normal;
-      opacity:.35;
+    .engine-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 10px 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .engine-heading p{
-      max-width:680px;
-
-      margin-top:30px;
-
-      color:var(--muted);
-
-      font-size:18px;
-      line-height:1.7;
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(35,122,75,.10);
     }
 
-    .engine-form{
-      width:100%;
-    }
+    .url-field {
+      width: min(
+        calc(100% - 32px),
+        1400px
+      );
 
-    /*
-      IMPORTANT:
-      This is intentionally NOT a small centered card.
-      It is a large full-width engine field.
-    */
+      min-height: 112px;
+      margin-inline: auto;
 
-    .url-field{
-      width:min(100% - 32px,1400px);
-      min-height:112px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
 
-      margin:auto;
+      padding:
+        14px
+        16px
+        14px
+        28px;
 
-      display:flex;
-      align-items:center;
-      gap:18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
 
-      padding:14px 16px 14px 28px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius:30px;
-
-      background:var(--surface);
-
-      box-shadow:var(--shadow);
+      background: var(--surface);
+      box-shadow: var(--shadow);
 
       transition:
         border-color .25s ease,
@@ -566,1284 +583,1666 @@
         transform .25s ease;
     }
 
-    .url-field:focus-within{
-      border-color:var(--border-strong);
+    .url-field:focus-within {
+      border-color: var(--border-strong);
 
       box-shadow:
-        0 30px 100px rgba(0,0,0,.12);
+        0 25px 80px rgba(0,0,0,.10);
 
-      transform:translateY(-2px);
+      transform: translateY(-2px);
     }
 
-    .url-icon{
-      flex:0 0 48px;
+    .url-icon {
+      flex: 0 0 auto;
 
-      width:48px;
-      height:48px;
+      width: 48px;
+      height: 48px;
 
-      display:grid;
-      place-items:center;
+      display: grid;
+      place-items: center;
 
-      border-radius:50%;
-
-      background:var(--accent);
-      color:var(--accentText);
-
-      font-size:21px;
-      font-weight:900;
+      border-radius: 15px;
+      background: var(--soft);
     }
 
-    .url-field input{
-      min-width:0;
-      flex:1;
-
-      height:70px;
-
-      border:0;
-      outline:0;
-
-      background:transparent;
-
-      color:var(--text);
-
-      font-size:
-        clamp(16px,2vw,20px);
-
-      font-weight:600;
+    .url-icon svg {
+      width: 21px;
+      height: 21px;
     }
 
-    .url-field input::placeholder{
-      color:var(--text);
-      opacity:.34;
+    #urlInput {
+      min-width: 0;
+      flex: 1;
+
+      border: 0;
+      outline: 0;
+
+      background: transparent;
+      color: var(--text);
+
+      font-size: clamp(16px, 2vw, 21px);
+      font-weight: 500;
     }
 
-    .url-field button{
-      flex:0 0 auto;
+    #urlInput::placeholder {
+      color: var(--muted-2);
+    }
 
-      min-height:82px;
+    .lookup-btn {
+      min-height: 78px;
+      min-width: 190px;
 
-      padding:0 32px;
+      padding: 0 28px;
 
-      border-radius:22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
 
-      background:var(--text);
-      color:var(--bg);
+      border: 0;
+      border-radius: 21px;
 
-      cursor:pointer;
+      background: var(--accent);
+      color: var(--accent-text);
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:15px;
-
-      font-size:15px;
-      font-weight:800;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+      font-weight: 800;
 
       transition:
         transform .2s ease,
         opacity .2s ease;
     }
 
-    .url-field button:hover{
-      transform:translateY(-2px);
+    .lookup-btn:hover {
+      transform: translateY(-2px);
     }
 
-    .url-field button:disabled{
-      opacity:.5;
-      cursor:wait;
+    .lookup-btn:active {
+      transform: scale(.98);
     }
 
-    .url-field button span{
-      font-size:23px;
+    .lookup-btn:disabled {
+      cursor: wait;
+      opacity: .55;
     }
 
-    .form-message{
-      width:min(100% - 32px,1400px);
-
-      margin:16px auto 0;
-
-      padding:15px 19px;
-
-      border-radius:16px;
-
-      font-size:14px;
-      line-height:1.5;
+    .lookup-btn svg {
+      width: 18px;
+      height: 18px;
     }
 
-    .form-message.error{
-      border:1px solid rgba(217,45,32,.22);
-      background:rgba(217,45,32,.07);
-      color:var(--danger);
+    .engine-note {
+      width: min(
+        calc(100% - 32px),
+        1400px
+      );
+
+      margin: 16px auto 0;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      color: var(--muted-2);
+      font-size: 12px;
     }
 
-    /* =========================================
+
+    /* ==================================================
        LOADING
-    ========================================= */
+    ================================================== */
 
-    .loading-area{
-      width:min(100% - 32px,1400px);
+    .loading {
+      display: none;
 
-      margin:28px auto 0;
+      width: min(
+        calc(100% - 32px),
+        1400px
+      );
 
-      padding:25px 0;
+      margin: 28px auto 0;
 
-      display:flex;
-      align-items:center;
-      gap:14px;
+      padding: 30px;
 
-      color:var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 24px;
 
-      font-family:"DM Mono",monospace;
-      font-size:11px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      background: var(--surface);
     }
 
-    .spinner{
-      width:20px;
-      height:20px;
-
-      border:
-        2px solid var(--border);
-
-      border-top-color:var(--text);
-
-      border-radius:50%;
-
-      animation:
-        spin .7s linear infinite;
+    .loading.show {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
-    @keyframes spin{
-      to{
-        transform:rotate(360deg);
+    .spinner {
+      width: 25px;
+      height: 25px;
+
+      border: 3px solid var(--border);
+      border-top-color: var(--text);
+      border-radius: 50%;
+
+      animation: spin .75s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
     }
 
-    /* =========================================
+    .loading strong {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+    }
+
+    .loading span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+
+    /* ==================================================
+       ERROR
+    ================================================== */
+
+    .error-box {
+      display: none;
+
+      width: min(
+        calc(100% - 32px),
+        1400px
+      );
+
+      margin: 28px auto 0;
+
+      padding: 24px;
+
+      border: 1px solid rgba(181,45,45,.18);
+      border-radius: 22px;
+
+      background: rgba(181,45,45,.06);
+      color: var(--danger);
+    }
+
+    .error-box.show {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .error-icon {
+      width: 35px;
+      height: 35px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+      background: rgba(181,45,45,.10);
+    }
+
+    .error-box strong {
+      display: block;
+
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+    }
+
+    .error-box p {
+      margin-top: 3px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+    /* ==================================================
        RESULT
-    ========================================= */
+    ================================================== */
 
-    .result-wrap{
-      width:min(100% - 32px,1400px);
-      margin:30px auto 0;
+    .result {
+      display: none;
+
+      width: min(
+        calc(100% - 32px),
+        1400px
+      );
+
+      margin: 28px auto 0;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 32px;
+
+      background: var(--surface-solid);
+      box-shadow: var(--shadow);
     }
 
-    .result-card{
-      display:grid;
+    .result.show {
+      display: block;
+      animation: resultIn .4s ease both;
+    }
 
+    @keyframes resultIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+
+      padding: 34px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-label {
+      color: var(--muted-2);
+
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .result-name {
+      margin-top: 9px;
+
+      max-width: 900px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(25px, 4vw, 48px);
+      line-height: 1;
+      letter-spacing: -.045em;
+      font-weight: 800;
+
+      overflow-wrap: anywhere;
+    }
+
+    .result-badge {
+      align-self: flex-start;
+
+      padding: 9px 12px;
+
+      border-radius: 999px;
+      background: rgba(35,122,75,.09);
+      color: var(--success);
+
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .result-grid {
+      display: grid;
       grid-template-columns:
-        minmax(0,1fr)
-        auto;
-
-      gap:30px;
-
-      padding:34px;
-
-      border:1px solid var(--border);
-
-      border-radius:30px;
-
-      background:var(--surface);
-
-      box-shadow:var(--shadow);
+        repeat(3, 1fr);
     }
 
-    .result-label{
-      margin-bottom:12px;
+    .result-stat {
+      min-width: 0;
+      padding: 27px 34px;
 
-      font-family:"DM Mono",monospace;
-      font-size:10px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-
-      opacity:.45;
+      border-right: 1px solid var(--border);
     }
 
-    .file-name{
-      overflow-wrap:anywhere;
-
-      font-size:
-        clamp(26px,4vw,48px);
-
-      line-height:1;
-
-      letter-spacing:-.045em;
+    .result-stat:last-child {
+      border-right: 0;
     }
 
-    .file-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:9px;
+    .result-stat span {
+      display: block;
 
-      margin-top:22px;
+      color: var(--muted-2);
+
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
     }
 
-    .meta-pill{
-      padding:9px 12px;
+    .result-stat strong {
+      display: block;
 
-      border:1px solid var(--border);
+      margin-top: 7px;
 
-      border-radius:999px;
+      color: var(--text);
 
-      color:var(--muted);
+      font-size: 17px;
+      font-weight: 700;
 
-      font-family:"DM Mono",monospace;
-      font-size:10px;
+      overflow-wrap: anywhere;
     }
 
-    .result-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      align-self:center;
-      flex-wrap:wrap;
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      padding: 25px 34px;
+
+      border-top: 1px solid var(--border);
+      background: var(--soft);
     }
 
-    .result-btn{
-      min-height:54px;
+    .action-btn {
+      min-height: 49px;
 
-      padding:0 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
 
-      border-radius:15px;
+      padding: 0 17px;
 
-      border:1px solid var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
 
-      background:var(--bg);
+      background: var(--surface-solid);
+      color: var(--text);
 
-      color:var(--text);
-
-      cursor:pointer;
-
-      font-size:13px;
-      font-weight:800;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:9px;
+      font-size: 13px;
+      font-weight: 800;
 
       transition:
         transform .2s ease,
-        background .2s ease;
+        border-color .2s ease;
     }
 
-    .result-btn:hover{
-      transform:translateY(-2px);
+    .action-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
     }
 
-    .result-btn.primary{
-      border-color:var(--text);
-
-      background:var(--text);
-      color:var(--bg);
+    .action-btn.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-text);
     }
 
-    .copy-note{
-      margin-top:14px;
-
-      color:var(--success);
-
-      font-size:13px;
+    .action-btn svg {
+      width: 17px;
+      height: 17px;
     }
 
-    /* =========================================
+
+    /* ==================================================
        RECENT
-    ========================================= */
+    ================================================== */
 
-    .recent-section{
-      width:min(100% - 32px,1400px);
-
-      margin:0 auto;
-
-      padding:
-        0 0 100px;
+    .recent {
+      margin-top: 45px;
     }
 
-    .recent-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
+    .recent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
 
-      padding-bottom:20px;
-
-      border-bottom:1px solid var(--border);
+      margin-bottom: 18px;
     }
 
-    .recent-head h3{
-      font-size:24px;
-      letter-spacing:-.035em;
+    .recent-header h3 {
+      font-family: "Manrope", sans-serif;
+      font-size: 17px;
+      font-weight: 800;
     }
 
-    .clear-recent{
-      background:none;
-      color:var(--muted);
-      cursor:pointer;
+    .clear-recent {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
 
-      font-family:"DM Mono",monospace;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.1em;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .recent-list{
-      list-style:none;
+    .clear-recent:hover {
+      color: var(--text);
     }
 
-    .recent-list li{
-      border-bottom:1px solid var(--border);
-    }
-
-    .recent-list button{
-      width:100%;
-
-      min-height:75px;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:20px;
-
-      background:none;
-      color:var(--text);
-
-      cursor:pointer;
-
-      text-align:left;
-    }
-
-    .r-name{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-
-      font-weight:600;
-    }
-
-    .r-size{
-      flex:0 0 auto;
-
-      color:var(--muted);
-
-      font-family:"DM Mono",monospace;
-      font-size:10px;
-    }
-
-    /* =========================================
-       STATEMENT
-    ========================================= */
-
-    .statement{
-      padding:
-        120px 0
-        140px;
-
-      border-top:1px solid var(--border);
-      border-bottom:1px solid var(--border);
-    }
-
-    .statement h2{
-      max-width:1200px;
-
-      font-size:
-        clamp(44px,7vw,105px);
-
-      line-height:.93;
-
-      letter-spacing:-.065em;
-    }
-
-    .statement h2 span{
-      opacity:.3;
-    }
-
-    /* =========================================
-       FEATURES
-    ========================================= */
-
-    .features{
-      padding:120px 0;
-    }
-
-    .section-intro{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:50px;
-
-      margin-bottom:60px;
-    }
-
-    .section-intro h2{
-      font-size:
-        clamp(40px,5vw,75px);
-
-      line-height:.95;
-      letter-spacing:-.055em;
-    }
-
-    .section-intro p{
-      max-width:530px;
-
-      align-self:end;
-
-      color:var(--muted);
-
-      line-height:1.75;
-    }
-
-    .feature-grid{
-      display:grid;
+    .recent-list {
+      display: grid;
       grid-template-columns:
-        repeat(3,1fr);
+        repeat(3, minmax(0,1fr));
 
-      border-top:1px solid var(--border);
-      border-left:1px solid var(--border);
+      gap: 12px;
     }
 
-    .feature{
-      min-height:270px;
+    .recent-item {
+      width: 100%;
 
-      padding:30px;
+      padding: 18px;
 
-      border-right:1px solid var(--border);
-      border-bottom:1px solid var(--border);
+      text-align: left;
 
-      background:transparent;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+
+      background: var(--surface);
+
+      color: var(--text);
 
       transition:
-        background .25s ease;
+        transform .2s ease,
+        border-color .2s ease;
     }
 
-    .feature:hover{
-      background:var(--surface);
+    .recent-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
     }
 
-    .feature-number{
-      font-family:"DM Mono",monospace;
-      font-size:10px;
-      opacity:.4;
+    .recent-item strong {
+      display: block;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .feature h3{
-      margin-top:75px;
+    .recent-item span {
+      display: block;
 
-      font-size:24px;
-      letter-spacing:-.035em;
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .feature p{
-      margin-top:12px;
+    .recent-empty {
+      padding: 30px;
 
-      color:var(--muted);
+      border: 1px dashed var(--border-strong);
+      border-radius: 18px;
 
-      font-size:14px;
-      line-height:1.65;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
     }
 
-    /* =========================================
+
+    /* ==================================================
+       STATEMENT
+    ================================================== */
+
+    .statement {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .statement-inner {
+      padding: 125px 0;
+
+      display: grid;
+      grid-template-columns: .65fr 1.35fr;
+      gap: 70px;
+    }
+
+    .statement-number {
+      color: var(--muted-2);
+
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .statement h2 {
+      max-width: 1000px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(38px, 6vw, 85px);
+      line-height: .97;
+      letter-spacing: -.06em;
+      font-weight: 800;
+    }
+
+    .statement h2 span {
+      color: var(--muted-2);
+    }
+
+
+    /* ==================================================
+       FEATURES
+    ================================================== */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+      gap: 1px;
+
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .feature {
+      min-height: 300px;
+
+      padding: 35px;
+
+      background: var(--bg);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border);
+      border-radius: 15px;
+
+      background: var(--surface);
+    }
+
+    .feature-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .feature h3 {
+      margin-top: 70px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      letter-spacing: -.025em;
+      font-weight: 800;
+    }
+
+    .feature p {
+      margin-top: 10px;
+
+      max-width: 400px;
+
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+
+    /* ==================================================
        FAQ
-    ========================================= */
+    ================================================== */
 
-    .faq{
-      padding:120px 0;
-      border-top:1px solid var(--border);
+    .faq-list {
+      max-width: 1000px;
+
+      margin-left: auto;
+
+      border-top: 1px solid var(--border);
     }
 
-    .faq-title{
-      margin-bottom:50px;
-
-      font-size:
-        clamp(45px,6vw,85px);
-
-      line-height:.95;
-      letter-spacing:-.06em;
+    .faq {
+      border-bottom: 1px solid var(--border);
     }
 
-    .faq-item{
-      border-top:1px solid var(--border);
+    .faq-question {
+      width: 100%;
+
+      padding: 25px 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+
+      border: 0;
+      background: transparent;
+
+      color: var(--text);
+
+      text-align: left;
+
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
     }
 
-    .faq-item:last-child{
-      border-bottom:1px solid var(--border);
+    .faq-plus {
+      width: 32px;
+      height: 32px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      transition: transform .25s ease;
     }
 
-    .faq-q{
-      width:100%;
-
-      min-height:82px;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:20px;
-
-      background:none;
-      color:var(--text);
-
-      cursor:pointer;
-
-      text-align:left;
-
-      font-size:17px;
-      font-weight:700;
+    .faq.open .faq-plus {
+      transform: rotate(45deg);
     }
 
-    .faq-plus{
-      font-size:24px;
-      font-weight:400;
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+
+      transition: grid-template-rows .3s ease;
+    }
+
+    .faq.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 65px 25px 0;
+
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+
+    /* ==================================================
+       CTA
+    ================================================== */
+
+    .cta {
+      padding: 80px 0 130px;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+
+      padding: clamp(40px, 7vw, 90px);
+
+      border-radius: 38px;
+
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .cta-box::after {
+      content: "ZXH";
+
+      position: absolute;
+      right: -30px;
+      bottom: -80px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(180px, 30vw, 450px);
+      line-height: 1;
+      letter-spacing: -.12em;
+
+      opacity: .055;
+      pointer-events: none;
+    }
+
+    .cta-box .eyebrow {
+      color: inherit;
+      opacity: .65;
+    }
+
+    .cta-box h2 {
+      position: relative;
+      z-index: 1;
+
+      max-width: 1000px;
+      margin-top: 20px;
+
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(44px, 7vw, 100px);
+      line-height: .92;
+      letter-spacing: -.065em;
+      font-weight: 800;
+    }
+
+    .cta-box p {
+      position: relative;
+      z-index: 1;
+
+      max-width: 620px;
+      margin-top: 25px;
+
+      opacity: .68;
+
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 35px;
+
+      min-height: 55px;
+      padding: 0 22px;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      border: 0;
+      border-radius: 15px;
+
+      background: var(--accent-text);
+      color: var(--accent);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
+
+    footer {
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-main {
+      padding: 60px 0 40px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 50px;
+    }
+
+    .footer-brand {
+      max-width: 430px;
+    }
+
+    .footer-brand h3 {
+      font-family: "Manrope", sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.035em;
+    }
+
+    .footer-brand p {
+      margin-top: 10px;
+
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      padding: 20px 0;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    /* ==================================================
+       TOAST
+    ================================================== */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      z-index: 3000;
+
+      width: max-content;
+      max-width: calc(100% - 30px);
+
+      padding: 13px 17px;
+
+      transform:
+        translate(-50%, 30px);
+
+      opacity: 0;
+      pointer-events: none;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--surface-solid);
+      box-shadow: var(--shadow-soft);
+
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 700;
 
       transition:
+        opacity .25s ease,
         transform .25s ease;
     }
 
-    .faq-item.open .faq-plus{
-      transform:rotate(45deg);
+    .toast.show {
+      opacity: 1;
+      transform:
+        translate(-50%, 0);
     }
 
-    .faq-a{
-      max-height:0;
-      overflow:hidden;
 
-      color:var(--muted);
-
-      line-height:1.75;
-
-      transition:
-        max-height .35s ease,
-        padding .35s ease;
-    }
-
-    .faq-item.open .faq-a{
-      max-height:250px;
-      padding:0 0 28px;
-    }
-
-    /* =========================================
-       CTA
-    ========================================= */
-
-    .cta{
-      padding:120px 0 150px;
-    }
-
-    .cta-inner{
-      position:relative;
-      overflow:hidden;
-
-      padding:
-        clamp(50px,8vw,110px);
-
-      border-radius:36px;
-
-      background:var(--text);
-      color:var(--bg);
-    }
-
-    .cta-inner h2{
-      max-width:950px;
-
-      font-size:
-        clamp(48px,7vw,100px);
-
-      line-height:.9;
-
-      letter-spacing:-.065em;
-    }
-
-    .cta-inner p{
-      max-width:570px;
-
-      margin-top:30px;
-
-      opacity:.58;
-
-      line-height:1.7;
-    }
-
-    .cta-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:12px;
-
-      margin-top:38px;
-
-      padding:16px 22px;
-
-      border-radius:15px;
-
-      background:var(--bg);
-      color:var(--text);
-
-      font-weight:800;
-
-      transition:
-        transform .2s ease;
-    }
-
-    .cta-btn:hover{
-      transform:translateY(-2px);
-    }
-
-    /* =========================================
-       FOOTER
-    ========================================= */
-
-    footer{
-      border-top:1px solid var(--border);
-
-      padding:35px 0 45px;
-    }
-
-    .footer-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:30px;
-    }
-
-    .footer-brand{
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:.06em;
-    }
-
-    .footer-credit{
-      color:var(--muted);
-
-      font-family:"DM Mono",monospace;
-      font-size:9px;
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-
-    /* =========================================
+    /* ==================================================
        PWA INSTALL
-    ========================================= */
+    ================================================== */
 
-    .install-popup{
-      position:fixed;
+    .install-popup {
+      position: fixed;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2500;
 
-      left:50%;
-      bottom:22px;
+      display: none;
 
-      z-index:500;
+      max-width: 560px;
+      margin-left: auto;
 
-      width:min(
-        calc(100% - 28px),
-        460px
+      padding: 20px;
+
+      border: 1px solid var(--border);
+      border-radius: 24px;
+
+      background: var(--surface-solid);
+      box-shadow: 0 25px 80px rgba(0,0,0,.18);
+
+      animation: installIn .35s ease both;
+    }
+
+    .install-popup.show {
+      display: block;
+    }
+
+    @keyframes installIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .install-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .install-logo {
+      width: 48px;
+      height: 48px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background: var(--accent);
+      color: var(--accent-text);
+
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .install-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .install-copy strong {
+      display: block;
+
+      font-family: "Manrope", sans-serif;
+      font-size: 14px;
+    }
+
+    .install-copy span {
+      display: block;
+      margin-top: 3px;
+
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .install-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .install-actions button {
+      flex: 1;
+
+      min-height: 44px;
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .install-actions .install-now {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+
+    /* ==================================================
+       UPDATE BANNER
+    ================================================== */
+
+    .update-banner {
+      position: fixed;
+      top: 95px;
+      left: 50%;
+      z-index: 2200;
+
+      width: min(
+        calc(100% - 30px),
+        500px
       );
 
-      padding:20px;
+      padding: 14px 16px;
 
-      transform:
-        translate(-50%,140%);
+      display: none;
+      align-items: center;
+      gap: 12px;
 
-      opacity:0;
+      transform: translateX(-50%);
 
-      border:1px solid var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
 
-      border-radius:24px;
+      background: var(--surface-solid);
+      box-shadow: var(--shadow);
 
-      background:var(--surface);
-
-      box-shadow:
-        0 30px 100px rgba(0,0,0,.2);
-
-      transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        opacity .45s ease;
+      font-size: 12px;
     }
 
-    .install-popup.show{
-      transform:
-        translate(-50%,0);
-
-      opacity:1;
+    .update-banner.show {
+      display: flex;
     }
 
-    .install-title{
-      font-size:17px;
-      font-weight:800;
+    .update-banner span {
+      flex: 1;
+      color: var(--muted);
     }
 
-    .install-copy{
-      margin-top:7px;
+    .update-banner button {
+      border: 0;
+      border-radius: 10px;
 
-      color:var(--muted);
+      padding: 9px 12px;
 
-      font-size:13px;
-      line-height:1.5;
+      background: var(--accent);
+      color: var(--accent-text);
+
+      font-size: 11px;
+      font-weight: 800;
     }
 
-    .install-actions{
-      display:flex;
-      gap:9px;
 
-      margin-top:15px;
-    }
-
-    .install-actions button{
-      flex:1;
-
-      min-height:46px;
-
-      border-radius:13px;
-
-      cursor:pointer;
-
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .install-btn{
-      background:var(--text);
-      color:var(--bg);
-    }
-
-    .install-close{
-      border:1px solid var(--border);
-      background:var(--bg);
-      color:var(--text);
-    }
-
-    /* =========================================
-       UPDATE
-    ========================================= */
-
-    .update-banner{
-      position:fixed;
-
-      top:90px;
-      left:50%;
-
-      z-index:600;
-
-      width:min(
-        calc(100% - 28px),
-        480px
-      );
-
-      transform:translateX(-50%);
-
-      padding:17px;
-
-      border:1px solid var(--border);
-
-      border-radius:18px;
-
-      background:var(--surface);
-
-      box-shadow:var(--shadow);
-    }
-
-    .update-title{
-      font-size:14px;
-      font-weight:800;
-    }
-
-    .update-actions{
-      display:flex;
-      gap:8px;
-
-      margin-top:12px;
-    }
-
-    .update-actions button{
-      min-height:40px;
-      padding:0 15px;
-
-      border-radius:11px;
-
-      cursor:pointer;
-
-      font-size:11px;
-      font-weight:800;
-    }
-
-    #update-btn{
-      background:var(--text);
-      color:var(--bg);
-    }
-
-    #update-dismiss{
-      border:1px solid var(--border);
-      background:var(--bg);
-      color:var(--text);
-    }
-
-    /* =========================================
+    /* ==================================================
        RESPONSIVE
-    ========================================= */
+    ================================================== */
 
-    @media(max-width:900px){
-
-      .hero-grid{
-        grid-template-columns:1fr;
-        gap:35px;
+    @media (max-width: 1000px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
       }
 
-      .hero{
-        min-height:auto;
-        padding:90px 0 110px;
+      .hero-description {
+        margin-left: 0;
       }
 
-      .hero-side{
-        max-width:500px;
+      .statement-inner {
+        grid-template-columns: 1fr;
+        gap: 25px;
       }
 
-      .section-intro{
-        grid-template-columns:1fr;
+      .features-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
       }
 
-      .feature-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .result-card{
-        grid-template-columns:1fr;
-      }
-
-      .result-actions{
-        align-self:start;
+      .recent-list {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
       }
     }
 
-    @media(max-width:700px){
-
-      .container{
-        width:calc(100% - 28px);
+    @media (max-width: 760px) {
+      .container {
+        width: min(
+          calc(100% - 28px),
+          var(--max)
+        );
       }
 
-      .site-header{
-        height:70px;
+      .section {
+        padding: 80px 0;
       }
 
-      .nav{
-        width:calc(100% - 28px);
+      .hero {
+        padding: 70px 0 55px;
       }
 
-      .brand-mark{
-        width:39px;
-        height:39px;
+      .hero h1 {
+        font-size: clamp(
+          54px,
+          17vw,
+          90px
+        );
       }
 
-      .brand-text span{
-        display:none;
+      .engine-section {
+        padding: 60px 0 80px;
       }
 
-      .hero{
-        padding:78px 0 105px;
+      .engine-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
       }
 
-      .hero h1{
-        font-size:
-          clamp(58px,17vw,90px);
+      .url-field {
+        width: 100%;
+        min-height: auto;
+
+        align-items: stretch;
+        flex-direction: column;
+
+        padding: 15px;
+
+        border-radius: 24px;
       }
 
-      .hero-copy{
-        margin-top:30px;
-        font-size:16px;
+      .url-icon {
+        display: none;
       }
 
-      .hero-scroll{
-        display:none;
+      #urlInput {
+        width: 100%;
+        min-height: 58px;
+
+        padding: 0 7px;
       }
 
-      .engine-section{
-        padding:80px 0;
+      .lookup-btn {
+        width: 100%;
+        min-height: 58px;
+        border-radius: 16px;
       }
 
-      .engine-heading{
-        margin-bottom:35px;
-        padding:0 14px;
+      .engine-note {
+        width: 100%;
+
+        flex-direction: column;
+        gap: 7px;
       }
 
-      .engine-heading h2{
-        font-size:
-          clamp(46px,14vw,72px);
+      .loading,
+      .error-box,
+      .result {
+        width: 100%;
       }
 
-      .engine-heading p{
-        font-size:16px;
+      .result-top {
+        padding: 25px;
+        flex-direction: column;
+        gap: 17px;
       }
 
-      .url-field{
-        width:calc(100% - 24px);
-
-        min-height:0;
-
-        flex-direction:column;
-        align-items:stretch;
-
-        padding:17px;
-
-        border-radius:24px;
+      .result-grid {
+        grid-template-columns: 1fr;
       }
 
-      .url-icon{
-        display:none;
+      .result-stat {
+        padding: 20px 25px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
       }
 
-      .url-field input{
-        width:100%;
-        height:65px;
+      .result-stat:last-child {
+        border-bottom: 0;
       }
 
-      .url-field button{
-        width:100%;
-        min-height:63px;
-        border-radius:18px;
+      .result-actions {
+        padding: 20px 25px;
       }
 
-      .feature-grid{
-        grid-template-columns:1fr;
+      .action-btn {
+        flex: 1 1 calc(50% - 10px);
       }
 
-      .feature{
-        min-height:230px;
+      .recent-list {
+        grid-template-columns: 1fr;
       }
 
-      .feature h3{
-        margin-top:55px;
+      .features-grid {
+        grid-template-columns: 1fr;
       }
 
-      .result-card{
-        padding:24px;
-        border-radius:24px;
+      .feature {
+        min-height: 250px;
       }
 
-      .result-actions{
-        width:100%;
+      .feature h3 {
+        margin-top: 55px;
       }
 
-      .result-btn{
-        flex:1;
+      .footer-main,
+      .footer-bottom {
+        flex-direction: column;
       }
 
-      .footer-row{
-        flex-direction:column;
-        align-items:flex-start;
+      .footer-links {
+        gap: 13px 20px;
       }
 
-      .cta-inner{
-        border-radius:26px;
+      .cta {
+        padding: 50px 0 80px;
+      }
+
+      .cta-box {
+        border-radius: 28px;
       }
     }
 
-    [hidden]{
-      display:none !important;
+    @media (max-width: 480px) {
+      .nav {
+        min-height: 72px;
+      }
+
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .brand-title {
+        font-size: 13px;
+      }
+
+      .brand-subtitle {
+        font-size: 8px;
+      }
+
+      .nav-actions {
+        gap: 7px;
+      }
+
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .result-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .action-btn {
+        width: 100%;
+      }
+
+      .statement-inner {
+        padding: 80px 0;
+      }
+
+      .faq-question {
+        font-size: 16px;
+      }
+
+      .install-popup {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="noise"></div>
-  <div class="top-line" id="scroll-line"></div>
-
-  <!-- =========================================
+  <!-- ==================================================
        HEADER
-  ========================================== -->
+  ================================================== -->
 
-  <header class="site-header">
-
-    <nav class="nav">
+  <header class="header">
+    <div class="container nav">
 
       <a
-        href="#top"
+        href="/"
         class="brand"
-        aria-label="ZXH OFFICIAL"
+        aria-label="ZXH OFFICIAL Home"
       >
+        <div class="brand-mark">ZXH</div>
 
-        <div class="brand-mark">
-          ZXH
+        <div class="brand-copy">
+          <div class="brand-title">
+            ZXH OFFICIAL
+          </div>
+
+          <div class="brand-subtitle">
+            MediaFire Engine
+          </div>
         </div>
-
-        <div class="brand-text">
-          <strong>ZXH OFFICIAL</strong>
-          <span>MEDIAFIRE ENGINE</span>
-        </div>
-
       </a>
 
       <div class="nav-actions">
 
         <button
-          class="nav-btn"
-          id="theme-toggle"
+          class="icon-btn"
+          id="themeBtn"
           type="button"
           aria-label="Toggle theme"
+          title="Toggle theme"
         >
-          <span
-            class="theme-icon"
-            id="theme-icon"
-          >☼</span>
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.42 1.42"></path>
+            <path d="m17.65 17.65 1.42 1.42"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.35 17.65-1.42 1.42"></path>
+            <path d="m19.07 4.93-1.42 1.42"></path>
+          </svg>
         </button>
-
-        <a
-          class="nav-btn"
-          href="#engine"
-          aria-label="Open engine"
-        >
-          ↗
-        </a>
-
-      </div>
-
-    </nav>
-
-  </header>
-
-
-  <main id="top">
-
-    <!-- =========================================
-         HERO
-    ========================================== -->
-
-    <section class="hero">
-
-      <div class="container hero-grid">
-
-        <div>
-
-          <div class="hero-kicker">
-            <i></i>
-            ZXH OFFICIAL / MEDIAFIRE DL
-          </div>
-
-          <h1>
-            MediaFire.
-            <span>Reimagined.</span>
-          </h1>
-
-          <p class="hero-copy">
-            A clean, fast and focused MediaFire file
-            engine by ZXH OFFICIAL. Paste a public
-            MediaFire link, process the file and get
-            the available file information instantly.
-          </p>
-
-        </div>
-
-        <div class="hero-side">
-
-          <div class="hero-side-number">
-            01 — ENGINE
-          </div>
-
-          <p>
-            No unnecessary dashboard clutter.
-            One powerful engine, built around the
-            thing that actually matters:
-            your MediaFire link.
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="hero-scroll">
-        Scroll to explore ↓
-      </div>
-
-    </section>
-
-
-    <!-- =========================================
-         MARQUEE
-    ========================================== -->
-
-    <div class="marquee">
-
-      <div class="marquee-track">
-
-        <div class="marquee-item">
-          <span>MEDIAFIRE ENGINE</span>
-          <b>✦</b>
-          <span>ZXH OFFICIAL</span>
-          <b>✦</b>
-          <span>FAST LOOKUP</span>
-          <b>✦</b>
-          <span>FILE INFORMATION</span>
-          <b>✦</b>
-        </div>
-
-        <div class="marquee-item" aria-hidden="true">
-          <span>MEDIAFIRE ENGINE</span>
-          <b>✦</b>
-          <span>ZXH OFFICIAL</span>
-          <b>✦</b>
-          <span>FAST LOOKUP</span>
-          <b>✦</b>
-          <span>FILE INFORMATION</span>
-          <b>✦</b>
-        </div>
 
       </div>
 
     </div>
+  </header>
 
 
-    <!-- =========================================
+  <!-- ==================================================
+       HERO
+  ================================================== -->
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            ZXH OFFICIAL / FILE ACCESS
+          </div>
+
+          <h1>
+            MediaFire
+            <span>made simple.</span>
+          </h1>
+        </div>
+
+        <div class="hero-description">
+
+          <p>
+            Paste a public MediaFire file URL.
+            ZXH OFFICIAL will inspect the page,
+            extract the available file information
+            and prepare the available download link.
+          </p>
+
+          <div class="hero-meta">
+            <span class="meta-pill">
+              No Account
+            </span>
+
+            <span class="meta-pill">
+              Fast Lookup
+            </span>
+
+            <span class="meta-pill">
+              Responsive
+            </span>
+
+            <span class="meta-pill">
+              PWA Ready
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================================================
+         MARQUEE
+    ================================================== -->
+
+    <div class="marquee">
+      <div class="marquee-track">
+
+        <div class="marquee-item">
+          MediaFire Lookup
+          <span class="marquee-dot"></span>
+          File Information
+          <span class="marquee-dot"></span>
+          Download Access
+          <span class="marquee-dot"></span>
+          ZXH OFFICIAL
+          <span class="marquee-dot"></span>
+        </div>
+
+        <div class="marquee-item">
+          MediaFire Lookup
+          <span class="marquee-dot"></span>
+          File Information
+          <span class="marquee-dot"></span>
+          Download Access
+          <span class="marquee-dot"></span>
+          ZXH OFFICIAL
+          <span class="marquee-dot"></span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==================================================
          ENGINE
-    ========================================== -->
+    ================================================== -->
 
     <section
       class="engine-section"
       id="engine"
     >
 
-      <div class="engine-heading">
+      <div class="container">
 
-        <span class="eyebrow">
-          02 / DROP YOUR LINK
-        </span>
+        <div class="engine-header">
 
-        <h2>
-          Paste the link.
-          <br>
-          <em>Get the file.</em>
-        </h2>
+          <div class="engine-title">
+            <div class="eyebrow">
+              File Lookup
+            </div>
 
-        <p>
-          Drop your public MediaFire link below.
-          ZXH OFFICIAL will process the page and
-          return the available file information.
-        </p>
+            <h2>
+              Enter your link.
+            </h2>
 
-      </div>
+            <p>
+              Use a public HTTPS MediaFire URL.
+            </p>
+          </div>
 
-
-      <form
-        id="lookup-form"
-        class="engine-form"
-        novalidate
-      >
-
-        <div class="url-field">
-
-          <span class="url-icon">
-            ↗
-          </span>
-
-          <input
-            id="mf-url"
-            type="url"
-            inputmode="url"
-            autocomplete="off"
-            autocapitalize="off"
-            spellcheck="false"
-            placeholder="Paste your MediaFire link here..."
-            aria-label="MediaFire URL"
-          >
-
-          <button
-            id="lookup-btn"
-            type="submit"
-          >
-            <span class="btn-text">
-              Get File Info
-            </span>
-
-            <span>
-              →
-            </span>
-          </button>
+          <div class="engine-status">
+            <span class="status-dot"></span>
+            Engine Online
+          </div>
 
         </div>
 
 
-        <div
-          id="form-error"
-          class="form-message error"
-          hidden
-        ></div>
+        <!-- URL INPUT -->
 
-
-        <div
-          id="api-error"
-          class="form-message error"
-          hidden
-        ></div>
-
-      </form>
-
-
-      <div
-        id="loading"
-        class="loading-area"
-        hidden
-      >
-
-        <span class="spinner"></span>
-
-        <span>
-          Processing MediaFire link...
-        </span>
-
-      </div>
-
-
-      <div class="result-wrap">
-
-        <article
-          id="result-card"
-          class="result-card"
-          hidden
+        <form
+          class="url-field"
+          id="lookupForm"
+          autocomplete="off"
         >
 
-          <div>
-
-            <div class="result-label">
-              File detected
-            </div>
-
-            <h3
-              id="file-name"
-              class="file-name"
+          <div class="url-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              Unknown file
-            </h3>
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </div>
 
-            <div class="file-meta">
+          <input
+            id="urlInput"
+            type="url"
+            inputmode="url"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="url"
+            placeholder="Paste your MediaFire link here..."
+            aria-label="MediaFire URL"
+            required
+          >
 
-              <span
-                class="meta-pill"
-                id="file-size"
-              >
-                Size unknown
-              </span>
+          <button
+            class="lookup-btn"
+            id="lookupBtn"
+            type="submit"
+          >
+            <span id="lookupText">
+              Analyze Link
+            </span>
 
-              <span
-                class="meta-pill"
-                id="file-date"
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </button>
+
+        </form>
+
+
+        <div class="engine-note">
+          <span>
+            Supported:
+            https://www.mediafire.com/...
+          </span>
+
+          <span>
+            ZXH OFFICIAL API • Public file pages only
+          </span>
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+          class="loading"
+          id="loading"
+          aria-live="polite"
+        >
+          <div class="spinner"></div>
+
+          <div>
+            <strong>
+              Analyzing MediaFire page
+            </strong>
+
+            <span>
+              Reading file metadata and available download information...
+            </span>
+          </div>
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+          class="error-box"
+          id="errorBox"
+          aria-live="assertive"
+        >
+          <div class="error-icon">
+            !
+          </div>
+
+          <div>
+            <strong id="errorTitle">
+              Lookup failed
+            </strong>
+
+            <p id="errorMessage">
+              Something went wrong.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- RESULT -->
+
+        <section
+          class="result"
+          id="result"
+          aria-live="polite"
+        >
+
+          <div class="result-top">
+
+            <div>
+              <div class="result-label">
+                File Found
+              </div>
+
+              <h3
+                class="result-name"
+                id="resultName"
               >
                 —
-              </span>
-
-              <a
-                class="meta-pill"
-                id="file-source"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Original MediaFire
-              </a>
-
+              </h3>
             </div>
 
-            <div
-              id="copy-note"
-              class="copy-note"
-              hidden
-            >
-              Share link copied successfully.
+            <div class="result-badge">
+              READY
+            </div>
+
+          </div>
+
+
+          <div class="result-grid">
+
+            <div class="result-stat">
+              <span>
+                File Size
+              </span>
+
+              <strong id="resultSize">
+                —
+              </strong>
+            </div>
+
+            <div class="result-stat">
+              <span>
+                Upload Date
+              </span>
+
+              <strong id="resultDate">
+                Not available
+              </strong>
+            </div>
+
+            <div class="result-stat">
+              <span>
+                Source
+              </span>
+
+              <strong>
+                MediaFire
+              </strong>
             </div>
 
           </div>
@@ -1852,126 +2251,222 @@
           <div class="result-actions">
 
             <a
-              id="download-btn"
-              class="result-btn primary"
+              class="action-btn primary"
+              id="downloadBtn"
               href="#"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Download
-              <span>↓</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3v12"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+
+              Download File
+            </a>
+
+            <a
+              class="action-btn"
+              id="sourceBtn"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M14 3h7v7"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+              </svg>
+
+              Open Source
             </a>
 
             <button
-              id="copy-btn"
-              class="result-btn"
+              class="action-btn"
+              id="copyBtn"
               type="button"
             >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="9"
+                  y="9"
+                  width="11"
+                  height="11"
+                  rx="2"
+                ></rect>
+
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+
+              Copy Link
+            </button>
+
+            <button
+              class="action-btn"
+              id="shareBtn"
+              type="button"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <path d="m8.59 13.51 6.83 3.98"></path>
+                <path d="m15.41 6.51-6.82 3.98"></path>
+              </svg>
+
               Share
-              <span>↗</span>
             </button>
 
           </div>
 
-        </article>
+        </section>
+
+
+        <!-- RECENT -->
+
+        <div class="recent">
+
+          <div class="recent-header">
+            <h3>
+              Recent Lookups
+            </h3>
+
+            <button
+              class="clear-recent"
+              id="clearRecent"
+              type="button"
+            >
+              Clear history
+            </button>
+          </div>
+
+          <div
+            class="recent-list"
+            id="recentList"
+          ></div>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =========================================
-         RECENT
-    ========================================== -->
-
-    <section
-      id="recent-section"
-      class="recent-section"
-      hidden
-    >
-
-      <div class="recent-head">
-
-        <h3>
-          Recent lookups
-        </h3>
-
-        <button
-          id="clear-recent"
-          class="clear-recent"
-          type="button"
-        >
-          Clear all
-        </button>
-
-      </div>
-
-      <ul
-        id="recent-list"
-        class="recent-list"
-      ></ul>
-
-    </section>
-
-
-    <!-- =========================================
+    <!-- ==================================================
          STATEMENT
-    ========================================== -->
+    ================================================== -->
 
     <section class="statement">
 
-      <div class="container">
+      <div class="container statement-inner">
 
-        <h2>
-          Built for the link.
-          <span>
-            Not the clutter.
-          </span>
-        </h2>
+        <div>
+          <div class="statement-number">
+            01 / ENGINE
+          </div>
+        </div>
+
+        <div>
+          <h2>
+            One link.
+            <span>
+              Clear information.
+            </span>
+            Direct access.
+          </h2>
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =========================================
+    <!-- ==================================================
          FEATURES
-    ========================================== -->
+    ================================================== -->
 
-    <section class="features">
+    <section class="section">
 
       <div class="container">
 
-        <div class="section-intro">
+        <div class="section-heading">
+
+          <div class="eyebrow">
+            Built for simplicity
+          </div>
 
           <h2>
-            Simple engine.
-            Serious UX.
+            Less friction.
+            More file clarity.
           </h2>
 
           <p>
-            ZXH MediaFire DL keeps the experience
-            deliberately focused. The interface is
-            designed around speed, readability and
-            straightforward file processing.
+            A focused MediaFire utility designed around
+            the actual task: provide a public file URL,
+            inspect its information and access the
+            available download destination.
           </p>
 
         </div>
 
 
-        <div class="feature-grid">
+        <div class="features-grid">
 
           <article class="feature">
 
-            <div class="feature-number">
-              01
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2v20"></path>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
             </div>
 
             <h3>
-              Public link lookup
+              File Metadata
             </h3>
 
             <p>
-              Submit a public MediaFire page and
-              retrieve the available file metadata.
+              Retrieve available filename, file size
+              and upload information from the public
+              MediaFire page.
             </p>
 
           </article>
@@ -1979,18 +2474,29 @@
 
           <article class="feature">
 
-            <div class="feature-number">
-              02
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3v12"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
             </div>
 
             <h3>
-              File information
+              Download Access
             </h3>
 
             <p>
-              Filename, size, upload information
-              and the original MediaFire source
-              are presented clearly.
+              When a valid public download destination
+              is found, the result provides direct access
+              to the available download URL.
             </p>
 
           </article>
@@ -1998,17 +2504,36 @@
 
           <article class="feature">
 
-            <div class="feature-number">
-              03
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="4"
+                ></rect>
+
+                <path d="M8 12h8"></path>
+                <path d="M12 8v8"></path>
+              </svg>
             </div>
 
             <h3>
-              Recent links
+              PWA Experience
             </h3>
 
             <p>
-              Your recent lookups are kept locally
-              on your device for convenient reuse.
+              Install ZXH OFFICIAL MediaFire Engine
+              on supported devices for a faster,
+              app-like experience.
             </p>
 
           </article>
@@ -2016,17 +2541,30 @@
 
           <article class="feature">
 
-            <div class="feature-number">
-              04
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M3 12h18"></path>
+                <path d="M12 3a14 14 0 0 1 0 18"></path>
+                <path d="M12 3a14 14 0 0 0 0 18"></path>
+              </svg>
             </div>
 
             <h3>
-              Shareable URLs
+              Responsive
             </h3>
 
             <p>
-              Generate a shareable ZXH page URL
-              containing the original MediaFire link.
+              Designed to remain usable across phones,
+              tablets and large desktop screens without
+              shrinking the experience into a tiny box.
             </p>
 
           </article>
@@ -2034,17 +2572,28 @@
 
           <article class="feature">
 
-            <div class="feature-number">
-              05
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
             </div>
 
             <h3>
-              Responsive by design
+              Controlled API
             </h3>
 
             <p>
-              The engine adapts from large desktop
-              screens down to compact mobile displays.
+              The frontend uses the same-origin
+              <strong>/api/scrape</strong> route instead
+              of exposing a third-party API directly.
             </p>
 
           </article>
@@ -2052,17 +2601,27 @@
 
           <article class="feature">
 
-            <div class="feature-number">
-              06
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5"></path>
+              </svg>
             </div>
 
             <h3>
-              ZXH OFFICIAL
+              Simple Workflow
             </h3>
 
             <p>
-              Designed and powered by Zulqarnain X
-              Haider under the ZXH OFFICIAL brand.
+              Paste. Analyze. Review. Download or open
+              the source. No unnecessary registration
+              flow or complicated dashboard.
             </p>
 
           </article>
@@ -2074,106 +2633,172 @@
     </section>
 
 
-    <!-- =========================================
+    <!-- ==================================================
          FAQ
-    ========================================== -->
+    ================================================== -->
 
-    <section class="faq">
+    <section class="section">
 
       <div class="container">
 
-        <h2 class="faq-title">
-          Questions.
-        </h2>
+        <div class="section-heading">
 
-
-        <div class="faq-item">
-
-          <button
-            class="faq-q"
-            type="button"
-          >
-            What links can I use?
-
-            <span class="faq-plus">
-              +
-            </span>
-          </button>
-
-          <div class="faq-a">
-            Use a public HTTPS MediaFire URL.
-            The backend validates that the submitted
-            address belongs to MediaFire before
-            processing it.
+          <div class="eyebrow">
+            Frequently asked
           </div>
+
+          <h2>
+            Questions,
+            answered.
+          </h2>
 
         </div>
 
 
-        <div class="faq-item">
+        <div class="faq-list">
 
-          <button
-            class="faq-q"
-            type="button"
-          >
-            Does the engine require an account?
+          <article class="faq">
 
-            <span class="faq-plus">
-              +
-            </span>
-          </button>
+            <button
+              class="faq-question"
+              type="button"
+            >
+              <span>
+                What links are supported?
+              </span>
 
-          <div class="faq-a">
-            The ZXH interface does not require a
-            user account for normal public-link
-            lookups.
-          </div>
+              <span class="faq-plus">
+                +
+              </span>
+            </button>
 
-        </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>
+                  Public HTTPS MediaFire URLs are supported.
+                  The backend validates that the submitted
+                  hostname belongs to MediaFire before
+                  processing the page.
+                </p>
+              </div>
+            </div>
 
-
-        <div class="faq-item">
-
-          <button
-            class="faq-q"
-            type="button"
-          >
-            Why does a copied API request fail?
-
-          <span class="faq-plus">
-            +
-          </span>
-
-          </button>
-
-          <div class="faq-a">
-            The backend is intended to serve the
-            official ZXH frontend and validates the
-            expected client context. It is not
-            designed as a general-purpose public API.
-          </div>
-
-        </div>
+          </article>
 
 
-        <div class="faq-item">
+          <article class="faq">
 
-          <button
-            class="faq-q"
-            type="button"
-          >
-            Where are recent links stored?
+            <button
+              class="faq-question"
+              type="button"
+            >
+              <span>
+                Do I need an account?
+              </span>
 
-            <span class="faq-plus">
-              +
-            </span>
-          </button>
+              <span class="faq-plus">
+                +
+              </span>
+            </button>
 
-          <div class="faq-a">
-            Recent lookup information is stored in
-            your browser's local storage and can be
-            cleared at any time.
-          </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>
+                  No account is required for the frontend
+                  lookup workflow.
+                </p>
+              </div>
+            </div>
+
+          </article>
+
+
+          <article class="faq">
+
+            <button
+              class="faq-question"
+              type="button"
+            >
+              <span>
+                Why can a download link sometimes be unavailable?
+              </span>
+
+              <span class="faq-plus">
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>
+                  The result depends on what the public
+                  MediaFire page exposes at the time of
+                  processing. If no download destination
+                  can be extracted, the file information can
+                  still be returned without a download URL.
+                </p>
+              </div>
+            </div>
+
+          </article>
+
+
+          <article class="faq">
+
+            <button
+              class="faq-question"
+              type="button"
+            >
+              <span>
+                Does the site call an external API from the browser?
+              </span>
+
+              <span class="faq-plus">
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>
+                  No. The frontend calls the same-origin
+                  <strong>/api/scrape</strong> endpoint.
+                  The server-side route performs the MediaFire
+                  page request.
+                </p>
+              </div>
+            </div>
+
+          </article>
+
+
+          <article class="faq">
+
+            <button
+              class="faq-question"
+              type="button"
+            >
+              <span>
+                Can I install it as an app?
+              </span>
+
+              <span class="faq-plus">
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>
+                  If the browser supports PWA installation
+                  and the required manifest/service worker
+                  files are deployed, the installation prompt
+                  can appear automatically.
+                </p>
+              </div>
+            </div>
+
+          </article>
 
         </div>
 
@@ -2182,33 +2807,50 @@
     </section>
 
 
-    <!-- =========================================
+    <!-- ==================================================
          CTA
-    ========================================== -->
+    ================================================== -->
 
     <section class="cta">
 
       <div class="container">
 
-        <div class="cta-inner">
+        <div class="cta-box">
+
+          <div class="eyebrow">
+            ZXH OFFICIAL
+          </div>
 
           <h2>
-            Your next file
-            starts with a link.
+            Your file.
+            Your link.
+            Your workflow.
           </h2>
 
           <p>
-            Return to the ZXH MediaFire engine,
-            paste your public link and let the
-            system handle the lookup.
+            Return to the MediaFire engine whenever you
+            need to inspect another public file link.
           </p>
 
           <a
+            class="cta-button"
             href="#engine"
-            class="cta-btn"
           >
-            Open MediaFire Engine
-            →
+            Start a new lookup
+
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
           </a>
 
         </div>
@@ -2220,1171 +2862,1297 @@
   </main>
 
 
-  <!-- =========================================
+  <!-- ==================================================
        FOOTER
-  ========================================== -->
+  ================================================== -->
 
   <footer>
 
-    <div class="container footer-row">
+    <div class="container footer-main">
 
       <div class="footer-brand">
-        ZXH OFFICIAL
+
+        <h3>
+          ZXH OFFICIAL
+        </h3>
+
+        <p>
+          MediaFire Downloader & File Lookup Engine.
+          Designed and developed as part of the ZXH
+          OFFICIAL web tools ecosystem.
+        </p>
+
       </div>
 
-      <div class="footer-credit">
-        POWERED BY ZULQARNAIN X HAIDER
+      <div class="footer-links">
+
+        <a href="#engine">
+          Lookup
+        </a>
+
+        <a href="#engine">
+          Downloader
+        </a>
+
+        <a href="#faq">
+          FAQ
+        </a>
+
       </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <span>
+        © <span id="year"></span> ZXH OFFICIAL
+      </span>
+
+      <span>
+        POWERED BY ZULQARNAIN X HAIDER
+      </span>
 
     </div>
 
   </footer>
 
 
-  <!-- =========================================
-       INSTALL POPUP
-  ========================================== -->
+  <!-- ==================================================
+       TOAST
+  ================================================== -->
 
-  <aside
-    id="install-popup"
-    class="install-popup"
+  <div
+    class="toast"
+    id="toast"
+    role="status"
     aria-live="polite"
   >
+    Copied
+  </div>
 
-    <div class="install-title">
-      Install ZXH MediaFire DL
-    </div>
 
-    <div class="install-copy">
-      Add the ZXH OFFICIAL engine to your
-      home screen for a faster experience.
+  <!-- ==================================================
+       PWA INSTALL POPUP
+  ================================================== -->
+
+  <div
+    class="install-popup"
+    id="installPopup"
+  >
+
+    <div class="install-row">
+
+      <div class="install-logo">
+        ZXH
+      </div>
+
+      <div class="install-copy">
+
+        <strong>
+          Install ZXH OFFICIAL
+        </strong>
+
+        <span>
+          Add MediaFire Engine to your home screen.
+        </span>
+
+      </div>
+
     </div>
 
     <div class="install-actions">
 
       <button
-        id="install-app"
-        class="install-btn"
         type="button"
-      >
-        Install App
-      </button>
-
-      <button
-        id="close-install"
-        class="install-close"
-        type="button"
-      >
-        Not now
-      </button>
-
-    </div>
-
-  </aside>
-
-
-  <!-- =========================================
-       UPDATE BANNER
-  ========================================== -->
-
-  <aside
-    id="update-banner"
-    class="update-banner"
-    hidden
-  >
-
-    <div class="update-title">
-      A new ZXH version is available.
-    </div>
-
-    <div class="update-actions">
-
-      <button
-        id="update-btn"
-        type="button"
-      >
-        Update
-      </button>
-
-      <button
-        id="update-dismiss"
-        type="button"
+        id="installLater"
       >
         Later
       </button>
 
+      <button
+        type="button"
+        class="install-now"
+        id="installNow"
+      >
+        Install App
+      </button>
+
     </div>
 
-  </aside>
+  </div>
 
+
+  <!-- ==================================================
+       UPDATE BANNER
+  ================================================== -->
+
+  <div
+    class="update-banner"
+    id="updateBanner"
+  >
+
+    <span>
+      A new version of ZXH OFFICIAL is available.
+    </span>
+
+    <button
+      type="button"
+      id="updateBtn"
+    >
+      Update
+    </button>
+
+  </div>
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+  ================================================== -->
 
   <script>
-    (() => {
-
-      "use strict";
-
-      /* =========================================
-         ELEMENTS
-      ========================================== */
-
-      const $ = (id) =>
-        document.getElementById(id);
-
-      const form =
-        $("lookup-form");
-
-      const input =
-        $("mf-url");
-
-      const btn =
-        $("lookup-btn");
-
-      const btnText =
-        btn.querySelector(".btn-text");
-
-      const formError =
-        $("form-error");
-
-      const loading =
-        $("loading");
-
-      const resultCard =
-        $("result-card");
-
-      const apiError =
-        $("api-error");
-
-      const copyNote =
-        $("copy-note");
-
-      const recentSection =
-        $("recent-section");
-
-      const recentList =
-        $("recent-list");
+    "use strict";
 
 
-fetch("/api/scrape?url=" + encodeURIComponent(value), {
-  method: "GET",
-  headers: {
-    "Accept": "application/json"
-  }
-})
+    /* ==================================================
+       ELEMENTS
+    ================================================== */
 
-      /* =========================================
-         UI HELPERS
-      ========================================== */
+    const lookupForm =
+      document.getElementById("lookupForm");
 
-      function show(el){
-        if(el){
-          el.hidden = false;
-        }
-      }
+    const urlInput =
+      document.getElementById("urlInput");
 
-      function hide(el){
-        if(el){
-          el.hidden = true;
-        }
-      }
+    const lookupBtn =
+      document.getElementById("lookupBtn");
+
+    const lookupText =
+      document.getElementById("lookupText");
+
+    const loading =
+      document.getElementById("loading");
+
+    const errorBox =
+      document.getElementById("errorBox");
+
+    const errorTitle =
+      document.getElementById("errorTitle");
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+    const result =
+      document.getElementById("result");
+
+    const resultName =
+      document.getElementById("resultName");
+
+    const resultSize =
+      document.getElementById("resultSize");
+
+    const resultDate =
+      document.getElementById("resultDate");
+
+    const downloadBtn =
+      document.getElementById("downloadBtn");
+
+    const sourceBtn =
+      document.getElementById("sourceBtn");
+
+    const copyBtn =
+      document.getElementById("copyBtn");
+
+    const shareBtn =
+      document.getElementById("shareBtn");
+
+    const recentList =
+      document.getElementById("recentList");
+
+    const clearRecent =
+      document.getElementById("clearRecent");
+
+    const themeBtn =
+      document.getElementById("themeBtn");
+
+    const themeIcon =
+      document.getElementById("themeIcon");
+
+    const toast =
+      document.getElementById("toast");
+
+    const installPopup =
+      document.getElementById("installPopup");
+
+    const installLater =
+      document.getElementById("installLater");
+
+    const installNow =
+      document.getElementById("installNow");
+
+    const updateBanner =
+      document.getElementById("updateBanner");
+
+    const updateBtn =
+      document.getElementById("updateBtn");
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
 
-      function setLoading(on){
+    /* ==================================================
+       STATE
+    ================================================== */
 
-        if(on){
+    const RECENT_KEY =
+      "mfdl_recent";
 
-          show(loading);
+    let currentOriginalUrl =
+      "";
 
-          btn.disabled = true;
+    let deferredInstallPrompt =
+      null;
 
-          btnText.textContent =
-            "Fetching...";
-
-        }else{
-
-          hide(loading);
-
-          btn.disabled = false;
-
-          btnText.textContent =
-            "Get File Info";
-        }
-      }
+    let activeServiceWorker =
+      null;
 
 
-      function resetViews(){
+    /* ==================================================
+       TOAST
+    ================================================== */
 
-        hide(formError);
-        hide(apiError);
-        hide(resultCard);
-        hide(copyNote);
+    let toastTimer = null;
 
-      }
+    function showToast(message) {
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2300);
+    }
 
 
-      /* =========================================
-         MEDIAFIRE VALIDATION
-      ========================================== */
+    /* ==================================================
+       THEME
+    ================================================== */
 
-      function isMediaFireUrl(value){
+    function applyTheme(theme) {
+      const isDark =
+        theme === "dark";
 
-        try{
+      document.documentElement.classList.toggle(
+        "dark",
+        isDark
+      );
 
-          const url =
-            new URL(
-              String(value).trim()
-            );
+      localStorage.setItem(
+        "zxh_mdfire_theme",
+        isDark ? "dark" : "light"
+      );
 
-          if(
-            url.protocol !== "https:"
-          ){
-            return false;
-          }
+      themeIcon.innerHTML = isDark
+        ? `
+          <path d="M21 12.79A9 9 0 1 1 11.21 3
+          7 7 0 0 0 21 12.79Z"></path>
+        `
+        : `
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.42 1.42"></path>
+          <path d="m17.65 17.65 1.42 1.42"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.35 17.65-1.42 1.42"></path>
+          <path d="m19.07 4.93-1.42 1.42"></path>
+        `;
+    }
 
-          const hostname =
-            url.hostname.toLowerCase();
+    const savedTheme =
+      localStorage.getItem(
+        "zxh_mdfire_theme"
+      );
 
-          return (
-            hostname === "mediafire.com" ||
-            hostname.endsWith(".mediafire.com")
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+      applyTheme(
+        prefersDark ? "dark" : "light"
+      );
+    }
+
+    themeBtn.addEventListener(
+      "click",
+      () => {
+        const isDark =
+          document.documentElement.classList.contains(
+            "dark"
           );
 
-        }catch{
+        applyTheme(
+          isDark ? "light" : "dark"
+        );
+      }
+    );
 
-          return false;
-        }
+
+    /* ==================================================
+       MEDIAFIRE URL VALIDATION
+    ================================================== */
+
+    function validateMediaFireUrl(value) {
+      let parsed;
+
+      try {
+        parsed =
+          new URL(
+            String(value).trim()
+          );
+      } catch {
+        return {
+          valid: false,
+          message: "Please enter a valid URL."
+        };
       }
 
+      if (
+        parsed.protocol !== "https:"
+      ) {
+        return {
+          valid: false,
+          message:
+            "Only HTTPS MediaFire links are supported."
+        };
+      }
 
-      /* =========================================
-         RECENT LOOKUPS
-      ========================================== */
+      const host =
+        parsed.hostname.toLowerCase();
 
-      const RECENT_KEY =
-        "mfdl_recent";
+      const isMediaFire =
+        host === "mediafire.com" ||
+        host.endsWith(".mediafire.com");
 
-      function getRecent(){
+      if (!isMediaFire) {
+        return {
+          valid: false,
+          message:
+            "Please enter a valid MediaFire URL."
+        };
+      }
 
-        try{
+      return {
+        valid: true,
+        url: parsed.toString()
+      };
+    }
 
-          const raw =
-            localStorage.getItem(
-              RECENT_KEY
-            );
 
-          const arr =
-            raw
-              ? JSON.parse(raw)
-              : [];
+    /* ==================================================
+       UI STATES
+    ================================================== */
 
-          return Array.isArray(arr)
-            ? arr
-            : [];
+    function hideAllStates() {
+      loading.classList.remove("show");
+      errorBox.classList.remove("show");
+      result.classList.remove("show");
+    }
 
-        }catch{
+    function showLoading() {
+      hideAllStates();
 
+      loading.classList.add("show");
+
+      lookupBtn.disabled = true;
+
+      lookupText.textContent =
+        "Analyzing...";
+    }
+
+    function hideLoading() {
+      loading.classList.remove("show");
+
+      lookupBtn.disabled = false;
+
+      lookupText.textContent =
+        "Analyze Link";
+    }
+
+    function showError(
+      message,
+      title = "Lookup failed"
+    ) {
+      hideAllStates();
+
+      errorTitle.textContent =
+        title;
+
+      errorMessage.textContent =
+        message;
+
+      errorBox.classList.add("show");
+    }
+
+
+    /* ==================================================
+       API REQUEST
+       IMPORTANT:
+       NO X-ZXH-CLIENT HEADER
+    ================================================== */
+
+    async function scrapeMediaFire(value) {
+
+      const validation =
+        validateMediaFireUrl(value);
+
+      if (!validation.valid) {
+        throw new Error(
+          validation.message
+        );
+      }
+
+      const endpoint =
+        "/api/scrape?url=" +
+        encodeURIComponent(
+          validation.url
+        );
+
+      const response =
+        await fetch(
+          endpoint,
+          {
+            method: "GET",
+
+            headers: {
+              "Accept":
+                "application/json"
+            },
+
+            cache: "no-store"
+          }
+        );
+
+      let data = null;
+
+      try {
+        data =
+          await response.json();
+      } catch {
+        throw new Error(
+          "The API returned an invalid response."
+        );
+      }
+
+      if (
+        !response.ok ||
+        !data ||
+        data.success !== true
+      ) {
+        throw new Error(
+          data?.error ||
+          `Request failed with HTTP ${response.status}.`
+        );
+      }
+
+      return data;
+    }
+
+
+    /* ==================================================
+       SHOW RESULT
+    ================================================== */
+
+    function showResult(data) {
+
+      resultName.textContent =
+        data.filename ||
+        "Unknown file";
+
+      resultSize.textContent =
+        data.filesize ||
+        "Size unknown";
+
+      resultDate.textContent =
+        data.upload_date ||
+        "Not available";
+
+      currentOriginalUrl =
+        data.original_url ||
+        urlInput.value.trim();
+
+      sourceBtn.href =
+        data.original_url ||
+        currentOriginalUrl;
+
+      if (
+        data.proxied_download_url
+      ) {
+        downloadBtn.href =
+          data.proxied_download_url;
+
+        downloadBtn.style.display =
+          "inline-flex";
+
+        downloadBtn.removeAttribute(
+          "aria-disabled"
+        );
+      } else {
+        downloadBtn.removeAttribute(
+          "href"
+        );
+
+        downloadBtn.style.display =
+          "none";
+      }
+
+      result.classList.add("show");
+    }
+
+
+    /* ==================================================
+       RECENT LOOKUPS
+    ================================================== */
+
+    function getRecent() {
+      try {
+        const raw =
+          localStorage.getItem(
+            RECENT_KEY
+          );
+
+        if (!raw) {
           return [];
         }
+
+        const parsed =
+          JSON.parse(raw);
+
+        return Array.isArray(parsed)
+          ? parsed
+          : [];
+
+      } catch {
+        return [];
+      }
+    }
+
+    function saveRecent(data) {
+
+      const item = {
+        filename:
+          data.filename ||
+          "Unknown file",
+
+        url:
+          data.original_url ||
+          "",
+
+        filesize:
+          data.filesize ||
+          ""
+      };
+
+      if (!item.url) {
+        return;
       }
 
+      let recent =
+        getRecent();
 
-      function saveRecent(item){
+      recent =
+        recent.filter(
+          entry =>
+            entry.url !== item.url
+        );
 
-        try{
+      recent.unshift(item);
 
-          const arr =
-            getRecent()
-              .filter(
-                r => r.url !== item.url
-              );
+      recent =
+        recent.slice(0, 6);
 
-          arr.unshift(item);
+      localStorage.setItem(
+        RECENT_KEY,
+        JSON.stringify(recent)
+      );
 
-          localStorage.setItem(
-            RECENT_KEY,
-            JSON.stringify(
-              arr.slice(0,6)
-            )
-          );
+      renderRecent();
+    }
 
-        }catch{}
+    function renderRecent() {
 
-        renderRecent();
+      const recent =
+        getRecent();
+
+      recentList.innerHTML =
+        "";
+
+      if (!recent.length) {
+
+        recentList.innerHTML = `
+          <div class="recent-empty">
+            Your recent MediaFire lookups will appear here.
+          </div>
+        `;
+
+        return;
       }
 
-
-      function renderRecent(){
-
-        const arr =
-          getRecent();
-
-        recentList.innerHTML = "";
-
-        if(!arr.length){
-
-          hide(recentSection);
-          return;
-        }
-
-        arr.forEach((item) => {
-
-          const li =
-            document.createElement("li");
+      recent.forEach(
+        (item) => {
 
           const button =
-            document.createElement("button");
+            document.createElement(
+              "button"
+            );
 
           button.type =
             "button";
 
-          const name =
-            document.createElement("span");
+          button.className =
+            "recent-item";
 
-          name.className =
-            "r-name";
+          button.innerHTML = `
+            <strong></strong>
+            <span></span>
+          `;
 
-          name.textContent =
-            item.name ||
+          button
+            .querySelector("strong")
+            .textContent =
+            item.filename ||
+            "Unknown file";
+
+          button
+            .querySelector("span")
+            .textContent =
+            item.filesize ||
             item.url;
-
-          const size =
-            document.createElement("span");
-
-          size.className =
-            "r-size";
-
-          size.textContent =
-            item.size || "";
-
-          button.appendChild(name);
-          button.appendChild(size);
 
           button.addEventListener(
             "click",
             () => {
 
-              input.value =
+              urlInput.value =
                 item.url;
 
-              form.requestSubmit();
-
-              window.scrollTo({
-                top:
-                  document.querySelector(
-                    "#engine"
-                  ).offsetTop - 70,
-
-                behavior:"smooth"
-              });
+              lookupForm.dispatchEvent(
+                new Event(
+                  "submit",
+                  {
+                    bubbles: true,
+                    cancelable: true
+                  }
+                )
+              );
 
             }
           );
 
-          li.appendChild(button);
+          recentList.appendChild(
+            button
+          );
+        }
+      );
+    }
 
-          recentList.appendChild(li);
+    clearRecent.addEventListener(
+      "click",
+      () => {
 
-        });
-
-        show(recentSection);
-      }
-
-
-      $("clear-recent")
-        .addEventListener(
-          "click",
-          () => {
-
-            try{
-              localStorage.removeItem(
-                RECENT_KEY
-              );
-            }catch{}
-
-            renderRecent();
-          }
+        localStorage.removeItem(
+          RECENT_KEY
         );
 
+        renderRecent();
 
-      /* =========================================
-         COPY
-      ========================================== */
+        showToast(
+          "Recent history cleared"
+        );
+      }
+    );
 
-      function copyText(text, done){
+    renderRecent();
 
-        const fallback = () => {
 
-          const textarea =
+    /* ==================================================
+       MAIN LOOKUP
+    ================================================== */
+
+    lookupForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        const value =
+          urlInput.value.trim();
+
+        if (!value) {
+          showError(
+            "Paste a MediaFire link first.",
+            "URL required"
+          );
+
+          urlInput.focus();
+
+          return;
+        }
+
+        showLoading();
+
+        try {
+
+          const data =
+            await scrapeMediaFire(
+              value
+            );
+
+          hideLoading();
+
+          showResult(
+            data
+          );
+
+          saveRecent(
+            data
+          );
+
+          history.replaceState(
+            null,
+            "",
+            "/?mf=" +
+            encodeURIComponent(
+              data.original_url ||
+              value
+            )
+          );
+
+          result.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+          });
+
+        } catch (error) {
+
+          hideLoading();
+
+          showError(
+            error?.message ||
+            "Could not process the MediaFire link."
+          );
+
+        }
+      }
+    );
+
+
+    /* ==================================================
+       COPY SOURCE LINK
+    ================================================== */
+
+    copyBtn.addEventListener(
+      "click",
+      async () => {
+
+        if (!currentOriginalUrl) {
+          showToast(
+            "No file link available"
+          );
+
+          return;
+        }
+
+        try {
+
+          await navigator.clipboard.writeText(
+            currentOriginalUrl
+          );
+
+          showToast(
+            "MediaFire link copied"
+          );
+
+        } catch {
+
+          const temp =
             document.createElement(
               "textarea"
             );
 
-          textarea.value =
-            text;
-
-          textarea.style.position =
-            "fixed";
-
-          textarea.style.left =
-            "-9999px";
+          temp.value =
+            currentOriginalUrl;
 
           document.body.appendChild(
-            textarea
+            temp
           );
 
-          textarea.select();
+          temp.select();
 
-          try{
-            document.execCommand("copy");
-          }catch{}
+          try {
+            document.execCommand(
+              "copy"
+            );
 
-          textarea.remove();
+            showToast(
+              "MediaFire link copied"
+            );
+          } catch {
+            showToast(
+              "Copy failed"
+            );
+          }
 
-          done();
-        };
-
-
-        if(
-          navigator.clipboard &&
-          navigator.clipboard.writeText
-        ){
-
-          navigator.clipboard
-            .writeText(text)
-            .then(done)
-            .catch(fallback);
-
-        }else{
-
-          fallback();
-
+          temp.remove();
         }
       }
+    );
 
 
-      /* =========================================
-         RESULT
-      ========================================== */
+    /* ==================================================
+       SHARE
+    ================================================== */
 
-      let currentOriginalUrl =
-        "";
+    shareBtn.addEventListener(
+      "click",
+      async () => {
 
-      let currentProxiedUrl =
-        "";
-
-
-      function renderResult(data){
-
-        $("file-name").textContent =
-          data.filename ||
-          "Unknown file";
-
-        $("file-size").textContent =
-          data.filesize ||
-          "Size unknown";
-
-        $("file-date").textContent =
-          data.upload_date ||
-          "Upload date unavailable";
-
-
-        const source =
-          $("file-source");
-
-        source.href =
-          data.original_url ||
-          "#";
-
-
-        const download =
-          $("download-btn");
-
-        currentProxiedUrl =
-          data.proxied_download_url ||
-          "";
-
-        currentOriginalUrl =
-          data.original_url ||
-          "";
-
-
-        if(currentProxiedUrl){
-
-          download.href =
-            currentProxiedUrl;
-
-          download.removeAttribute(
-            "aria-disabled"
+        if (!currentOriginalUrl) {
+          showToast(
+            "Analyze a file first"
           );
 
-          download.style.pointerEvents =
-            "auto";
-
-          download.style.opacity =
-            "1";
-
-        }else{
-
-          download.href =
-            "#";
-
-          download.style.pointerEvents =
-            "none";
-
-          download.style.opacity =
-            ".45";
+          return;
         }
 
-
-        if(data.filename){
-
-          download.setAttribute(
-            "download",
-            data.filename
+        const shareUrl =
+          window.location.origin +
+          "/?mf=" +
+          encodeURIComponent(
+            currentOriginalUrl
           );
 
-        }else{
+        const shareData = {
+          title:
+            "ZXH OFFICIAL MediaFire Downloader",
 
-          download.removeAttribute(
-            "download"
-          );
-
-        }
-
-
-        show(resultCard);
-
-        saveRecent({
+          text:
+            "MediaFire file lookup via ZXH OFFICIAL.",
 
           url:
-            data.original_url,
+            shareUrl
+        };
 
-          name:
-            data.filename,
+        try {
 
-          size:
-            data.filesize
+          if (
+            navigator.share
+          ) {
 
-        });
-
-
-        resultCard.scrollIntoView({
-          behavior:"smooth",
-          block:"center"
-        });
-
-      }
-
-
-      /* =========================================
-         SHARE
-      ========================================== */
-
-      $("copy-btn")
-        .addEventListener(
-          "click",
-          () => {
-
-            if(!currentOriginalUrl){
-              return;
-            }
-
-            const share =
-              window.location.origin +
-              "/?mf=" +
-              encodeURIComponent(
-                currentOriginalUrl
-              );
-
-            copyText(
-              share,
-              () => {
-
-                show(copyNote);
-
-                setTimeout(
-                  () => hide(copyNote),
-                  3500
-                );
-
-              }
+            await navigator.share(
+              shareData
             );
-
-          }
-        );
-
-
-      /* =========================================
-         FORM SUBMIT
-      ========================================== */
-
-      form.addEventListener(
-        "submit",
-        async (event) => {
-
-          event.preventDefault();
-
-          resetViews();
-
-          const value =
-            input.value.trim();
-
-
-          if(!value){
-
-            formError.textContent =
-              "Paste a MediaFire link first.";
-
-            show(formError);
-
-            input.focus();
 
             return;
           }
 
+          await navigator.clipboard.writeText(
+            shareUrl
+          );
 
-          if(!isMediaFireUrl(value)){
+          showToast(
+            "Share link copied"
+          );
 
-            formError.textContent =
-              "That doesn't look like a MediaFire link. Use a valid HTTPS MediaFire URL.";
+        } catch (error) {
 
-            show(formError);
-
-            input.focus();
-
+          if (
+            error?.name ===
+            "AbortError"
+          ) {
             return;
           }
 
+          try {
 
-          setLoading(true);
-
-
-          try{
-
-            const response =
-              await fetch(
-                API_ENDPOINT +
-                encodeURIComponent(value),
-                {
-                  method:"GET",
-
-                  headers:{
-                    "Accept":
-                      "application/json",
-
-                    "X-ZXH-Client":
-                      ZXH_CLIENT
-                  }
-                }
-              );
-
-
-            let data = null;
-
-            try{
-
-              data =
-                await response.json();
-
-            }catch{
-
-              throw new Error(
-                "Invalid server response."
-              );
-
-            }
-
-
-            if(
-              !response.ok ||
-              !data ||
-              !data.success
-            ){
-
-              throw new Error(
-                data?.error ||
-                "Something went wrong. Please try again."
-              );
-
-            }
-
-
-            renderResult(data);
-
-          }catch(error){
-
-            apiError.textContent =
-              error?.message ||
-              "Could not reach the ZXH server. Check your connection and try again.";
-
-            show(apiError);
-
-          }finally{
-
-            setLoading(false);
-
-          }
-
-        }
-      );
-
-
-      /* =========================================
-         SHARE URL AUTO LOAD
-      ========================================== */
-
-      try{
-
-        const shared =
-          new URLSearchParams(
-            window.location.search
-          ).get("mf");
-
-        if(
-          shared &&
-          isMediaFireUrl(shared)
-        ){
-
-          input.value =
-            shared;
-
-          setTimeout(
-            () => form.requestSubmit(),
-            500
-          );
-
-        }
-
-      }catch{}
-
-
-      /* =========================================
-         THEME
-      ========================================== */
-
-      const themeToggle =
-        $("theme-toggle");
-
-      const themeIcon =
-        $("theme-icon");
-
-      const themeMeta =
-        $("theme-color");
-
-
-      function applyTheme(theme){
-
-        const dark =
-          theme === "dark";
-
-        document.documentElement
-          .classList
-          .toggle(
-            "dark",
-            dark
-          );
-
-        themeIcon.textContent =
-          dark ? "☾" : "☼";
-
-        themeMeta.setAttribute(
-          "content",
-          dark ? "#0c0c0c" : "#f4f4f0"
-        );
-
-        try{
-
-          localStorage.setItem(
-            "zxh_theme",
-            theme
-          );
-
-        }catch{}
-
-      }
-
-
-      let savedTheme = null;
-
-      try{
-
-        savedTheme =
-          localStorage.getItem(
-            "zxh_theme"
-          );
-
-      }catch{}
-
-
-      if(
-        savedTheme === "dark" ||
-        savedTheme === "light"
-      ){
-
-        applyTheme(savedTheme);
-
-      }else{
-
-        applyTheme(
-          window.matchMedia &&
-          window.matchMedia(
-            "(prefers-color-scheme:dark)"
-          ).matches
-            ? "dark"
-            : "light"
-        );
-
-      }
-
-
-      themeToggle.addEventListener(
-        "click",
-        () => {
-
-          const isDark =
-            document.documentElement
-              .classList
-              .contains("dark");
-
-          applyTheme(
-            isDark
-              ? "light"
-              : "dark"
-          );
-
-        }
-      );
-
-
-      /* =========================================
-         FAQ
-      ========================================== */
-
-      document
-        .querySelectorAll(".faq-item")
-        .forEach((item) => {
-
-          const question =
-            item.querySelector(
-              ".faq-q"
+            await navigator.clipboard.writeText(
+              shareUrl
             );
+
+            showToast(
+              "Share link copied"
+            );
+
+          } catch {
+
+            showToast(
+              "Sharing unavailable"
+            );
+          }
+        }
+      }
+    );
+
+
+    /* ==================================================
+       FAQ
+    ================================================== */
+
+    document
+      .querySelectorAll(".faq-question")
+      .forEach(
+        (question) => {
 
           question.addEventListener(
             "click",
             () => {
 
-              const wasOpen =
-                item.classList.contains(
+              const faq =
+                question.closest(
+                  ".faq"
+                );
+
+              const isOpen =
+                faq.classList.contains(
                   "open"
                 );
 
-
               document
                 .querySelectorAll(
-                  ".faq-item.open"
+                  ".faq.open"
                 )
                 .forEach(
-                  other =>
-                    other.classList.remove(
+                  (item) =>
+                    item.classList.remove(
                       "open"
                     )
                 );
 
-
-              if(!wasOpen){
-
-                item.classList.add(
+              if (!isOpen) {
+                faq.classList.add(
                   "open"
                 );
-
               }
-
             }
           );
-
-        });
-
-
-      /* =========================================
-         SCROLL PROGRESS
-      ========================================== */
-
-      const scrollLine =
-        $("scroll-line");
-
-      function updateScroll(){
-
-        const scrollTop =
-          window.scrollY;
-
-        const max =
-          document.documentElement
-            .scrollHeight -
-          window.innerHeight;
-
-        const progress =
-          max > 0
-            ? scrollTop / max
-            : 0;
-
-        scrollLine.style.transform =
-          `scaleX(${progress})`;
-
-      }
-
-      window.addEventListener(
-        "scroll",
-        updateScroll,
-        {passive:true}
+        }
       );
 
-      updateScroll();
 
+    /* ==================================================
+       URL ?mf= AUTO LOOKUP
+    ================================================== */
 
-      /* =========================================
-         PWA INSTALL
-      ========================================== */
+    function loadSharedLookup() {
 
-      let deferredPrompt =
-        null;
-
-      const installPopup =
-        $("install-popup");
-
-      const installButton =
-        $("install-app");
-
-      const closeInstall =
-        $("close-install");
-
-
-      function showInstallPopup(){
-
-        installPopup.classList.add(
-          "show"
+      const params =
+        new URLSearchParams(
+          window.location.search
         );
 
+      const sharedUrl =
+        params.get("mf");
+
+      if (!sharedUrl) {
+        return;
       }
 
+      const validation =
+        validateMediaFireUrl(
+          sharedUrl
+        );
 
-      function hideInstallPopup(){
+      if (!validation.valid) {
+        return;
+      }
+
+      urlInput.value =
+        validation.url;
+
+      setTimeout(
+        () => {
+
+          lookupForm.dispatchEvent(
+            new Event(
+              "submit",
+              {
+                bubbles: true,
+                cancelable: true
+              }
+            )
+          );
+
+        },
+        350
+      );
+    }
+
+    loadSharedLookup();
+
+
+    /* ==================================================
+       PWA INSTALL PROMPT
+    ================================================== */
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      (event) => {
+
+        event.preventDefault();
+
+        deferredInstallPrompt =
+          event;
+
+        setTimeout(
+          () => {
+
+            if (
+              !localStorage.getItem(
+                "zxh_install_dismissed"
+              )
+            ) {
+              installPopup.classList.add(
+                "show"
+              );
+            }
+
+          },
+          5000
+        );
+      }
+    );
+
+
+    installLater.addEventListener(
+      "click",
+      () => {
 
         installPopup.classList.remove(
           "show"
         );
 
+        localStorage.setItem(
+          "zxh_install_dismissed",
+          "1"
+        );
       }
+    );
 
 
-      window.addEventListener(
-        "beforeinstallprompt",
-        (event) => {
+    installNow.addEventListener(
+      "click",
+      async () => {
 
-          event.preventDefault();
+        if (!deferredInstallPrompt) {
 
-          deferredPrompt =
-            event;
-
-          setTimeout(
-            showInstallPopup,
-            5000
+          showToast(
+            "Use your browser's Add to Home Screen option."
           );
 
+          installPopup.classList.remove(
+            "show"
+          );
+
+          return;
         }
-      );
+
+        deferredInstallPrompt.prompt();
+
+        try {
+          await deferredInstallPrompt.userChoice;
+        } catch {}
+
+        deferredInstallPrompt =
+          null;
+
+        installPopup.classList.remove(
+          "show"
+        );
+      }
+    );
 
 
-      installButton.addEventListener(
-        "click",
-        async () => {
+    window.addEventListener(
+      "appinstalled",
+      () => {
 
-          if(!deferredPrompt){
-            return;
-          }
+        deferredInstallPrompt =
+          null;
 
-          deferredPrompt.prompt();
+        installPopup.classList.remove(
+          "show"
+        );
 
-          try{
-
-            await deferredPrompt.userChoice;
-
-          }catch{}
-
-          deferredPrompt =
-            null;
-
-          hideInstallPopup();
-
-        }
-      );
+        showToast(
+          "ZXH OFFICIAL installed"
+        );
+      }
+    );
 
 
-      closeInstall.addEventListener(
-        "click",
-        hideInstallPopup
-      );
+    /* ==================================================
+       SERVICE WORKER
+    ================================================== */
 
+    if (
+      "serviceWorker" in navigator
+    ) {
 
       window.addEventListener(
-        "appinstalled",
-        () => {
+        "load",
+        async () => {
 
-          deferredPrompt =
-            null;
+          try {
 
-          hideInstallPopup();
+            const registration =
+              await navigator.serviceWorker.register(
+                "/sw.js"
+              );
 
-        }
-      );
+            activeServiceWorker =
+              registration;
 
-
-      /* =========================================
-         SERVICE WORKER
-      ========================================== */
-
-      if(
-        "serviceWorker" in navigator
-      ){
-
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
+            if (
+              registration.waiting
+            ) {
+              updateBanner.classList.add(
+                "show"
+              );
+            }
 
             registration.addEventListener(
               "updatefound",
               () => {
 
-                const incoming =
+                const newWorker =
                   registration.installing;
 
-                if(!incoming){
+                if (!newWorker) {
                   return;
                 }
 
-                incoming.addEventListener(
+                newWorker.addEventListener(
                   "statechange",
                   () => {
 
-                    if(
-                      incoming.state ===
+                    if (
+                      newWorker.state ===
                       "installed" &&
                       navigator.serviceWorker.controller
-                    ){
-
-                      showUpdateBanner();
-
+                    ) {
+                      updateBanner.classList.add(
+                        "show"
+                      );
                     }
 
                   }
                 );
-
               }
             );
 
-          })
-          .catch(() => {});
+          } catch (error) {
+
+            console.warn(
+              "ZXH Service Worker registration failed:",
+              error
+            );
+
+          }
+        }
+      );
+    }
 
 
-        navigator.serviceWorker
-          .addEventListener(
-            "message",
-            (event) => {
+    /* ==================================================
+       SERVICE WORKER UPDATE
+    ================================================== */
 
-              if(
-                event.data &&
-                event.data.type ===
-                "SW_UPDATED"
-              ){
+    updateBtn.addEventListener(
+      "click",
+      () => {
 
-                showUpdateBanner();
+        if (
+          activeServiceWorker &&
+          activeServiceWorker.waiting
+        ) {
 
-              }
+          activeServiceWorker.waiting.postMessage({
+            type: "SKIP_WAITING"
+          });
 
-            }
-          );
+        } else {
 
+          window.location.reload();
+
+        }
       }
+    );
+
+    navigator.serviceWorker?.addEventListener(
+      "controllerchange",
+      () => {
+        window.location.reload();
+      }
+    );
 
 
-      /* =========================================
-         UPDATE BANNER
-      ========================================== */
+    /* ==================================================
+       KEYBOARD SHORTCUT
+    ================================================== */
 
-      function showUpdateBanner(){
+    document.addEventListener(
+      "keydown",
+      (event) => {
 
-        const banner =
-          $("update-banner");
+        if (
+          event.key === "/" &&
+          document.activeElement !== urlInput
+        ) {
 
-        if(
-          !banner ||
-          !banner.hidden
-        ){
+          event.preventDefault();
 
-          return;
+          urlInput.focus();
         }
 
-        banner.hidden = false;
+        if (
+          event.key === "Escape" &&
+          document.activeElement === urlInput
+        ) {
 
+          urlInput.blur();
+        }
       }
+    );
 
 
-      $("update-btn")
-        .addEventListener(
-          "click",
-          async () => {
+    /* ==================================================
+       CLEAN URL AFTER NORMAL VISIT
+    ================================================== */
 
-            if(
-              navigator.serviceWorker
-            ){
+    window.addEventListener(
+      "pageshow",
+      () => {
 
-              try{
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
 
-                const registration =
-                  await navigator.serviceWorker
-                    .getRegistration();
+        if (!params.has("mf")) {
+          currentOriginalUrl = "";
+        }
+      }
+    );
 
-                if(
-                  registration &&
-                  registration.waiting
-                ){
-
-                  registration.waiting
-                    .postMessage({
-                      type:
-                        "SKIP_WAITING"
-                    });
-
-                }
-
-              }catch{}
-
-            }
-
-            window.location.reload();
-
-          }
-        );
-
-
-      $("update-dismiss")
-        .addEventListener(
-          "click",
-          () => {
-
-            $("update-banner").hidden =
-              true;
-
-          }
-        );
-
-
-      /* =========================================
-         INITIALIZE
-      ========================================== */
-
-      renderRecent();
-
-    })();
   </script>
 
 </body>
-  </html>
+</html>
