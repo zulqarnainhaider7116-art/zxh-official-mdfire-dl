@@ -2364,23 +2364,12 @@
         $("recent-list");
 
 
-      /* =========================================
-         ZXH API
-      ========================================== */
-
-      const API_ENDPOINT =
-        "/api/scrape?url=";
-
-      /*
-       * This header must match the backend.
-       *
-       * NOTE:
-       * It is a client identifier, NOT a secret.
-       */
-
-      const ZXH_CLIENT =
-        "ZXH-MDFIRE-OFFICIAL-2026";
-
+fetch("/api/scrape?url=" + encodeURIComponent(value), {
+  method: "GET",
+  headers: {
+    "Accept": "application/json"
+  }
+})
 
       /* =========================================
          UI HELPERS
