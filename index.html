@@ -2,70 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <meta
-    name="theme-color"
-    content="#f5f5f2"
-  >
-
-  <meta
-    name="description"
-    content="ZXH OFFICIAL MediaFire Downloader — lookup MediaFire files, preview file information and access available download links."
-  >
-
-  <meta
-    name="robots"
-    content="index, follow"
-  >
-
-  <meta
-    property="og:title"
-    content="ZXH OFFICIAL — MediaFire Downloader"
-  >
-
-  <meta
-    property="og:description"
-    content="Fast MediaFire file lookup and download access by ZXH OFFICIAL."
-  >
-
-  <meta
-    property="og:type"
-    content="website"
-  >
-
-  <link
-    rel="manifest"
-    href="/manifest.json"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5f2">
+  <meta name="description" content="ZXH OFFICIAL MediaFire Downloader — lookup MediaFire files, preview file information and access available download links.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="ZXH OFFICIAL — MediaFire Downloader">
+  <meta property="og:description" content="Fast MediaFire file lookup and download access by ZXH OFFICIAL.">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <title>ZXH OFFICIAL — MediaFire Downloader</title>
 
   <style>
     /* ==================================================
        ROOT
     ================================================== */
-
     :root {
       --bg: #f5f5f2;
       --bg-2: #ffffff;
@@ -81,19 +34,8 @@
       --soft: #eeeeeb;
       --success: #237a4b;
       --danger: #b52d2d;
-      --warning: #9a6814;
-
-      --shadow:
-        0 20px 60px rgba(0,0,0,.07);
-
-      --shadow-soft:
-        0 10px 35px rgba(0,0,0,.05);
-
-      --radius-xl: 38px;
-      --radius-lg: 28px;
-      --radius-md: 20px;
-      --radius-sm: 14px;
-
+      --shadow: 0 20px 60px rgba(0,0,0,.07);
+      --shadow-soft: 0 10px 35px rgba(0,0,0,.05);
       --max: 1480px;
     }
 
@@ -112,116 +54,139 @@
       --soft: #202020;
       --success: #54c785;
       --danger: #ff7070;
-      --warning: #e0ad55;
-
-      --shadow:
-        0 25px 70px rgba(0,0,0,.30);
-
-      --shadow-soft:
-        0 15px 45px rgba(0,0,0,.20);
+      --shadow: 0 25px 70px rgba(0,0,0,.30);
+      --shadow-soft: 0 15px 45px rgba(0,0,0,.20);
     }
 
-
-    /* ==================================================
-       RESET
-    ================================================== */
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       min-height: 100vh;
       background:
-        radial-gradient(
-          circle at 15% 5%,
-          rgba(0,0,0,.035),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 85% 20%,
-          rgba(0,0,0,.025),
-          transparent 30%
-        ),
+        radial-gradient(circle at 15% 5%, rgba(0,0,0,.035), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(0,0,0,.025), transparent 30%),
         var(--bg);
-
       color: var(--text);
       font-family: "DM Sans", system-ui, sans-serif;
-      line-height: 1.5;
+      line-height: 1.55;
+      font-size: 16px;
       overflow-x: hidden;
-      transition:
-        background .3s ease,
-        color .3s ease;
+      transition: background .3s ease, color .3s ease;
     }
-
     html.dark body {
       background:
-        radial-gradient(
-          circle at 10% 0%,
-          rgba(255,255,255,.035),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 90% 15%,
-          rgba(255,255,255,.025),
-          transparent 30%
-        ),
+        radial-gradient(circle at 10% 0%, rgba(255,255,255,.035), transparent 25%),
+        radial-gradient(circle at 90% 15%, rgba(255,255,255,.025), transparent 30%),
         var(--bg);
     }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--text); color: var(--bg); }
 
-    button,
-    input {
-      font: inherit;
+    /* ==================================================
+       PRELOADER
+    ================================================== */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      transition: opacity .55s ease, visibility .55s ease;
     }
-
-    button {
-      cursor: pointer;
+    #preloader.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+    .preloader-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      animation: preFade .5s ease both;
     }
-
-    ::selection {
-      background: var(--text);
-      color: var(--bg);
+    @keyframes preFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
+    .preloader-logo {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-family: "Manrope", sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -.08em;
+      animation: prePulse 1.6s ease-in-out infinite;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    }
+    @keyframes prePulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.05); }
+    }
+    .preloader-title {
+      font-family: "Manrope", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .preloader-sub {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .preloader-bar {
+      width: 210px;
+      height: 4px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      overflow: hidden;
+      position: relative;
+    }
+    .preloader-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 40%;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: preBar 1.35s ease-in-out infinite;
+    }
+    @keyframes preBar {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
 
     /* ==================================================
        GLOBAL
     ================================================== */
-
     .container {
-      width: min(
-        calc(100% - 40px),
-        var(--max)
-      );
-
+      width: min(calc(100% - 40px), var(--max));
       margin-inline: auto;
     }
-
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      letter-spacing: .15em;
+      letter-spacing: .16em;
       text-transform: uppercase;
-
       color: var(--muted);
     }
-
     .eyebrow::before {
       content: "";
       width: 7px;
@@ -229,1653 +194,874 @@
       border-radius: 50%;
       background: currentColor;
     }
-
-    .section {
-      padding: 120px 0;
-    }
-
-    .section-heading {
-      max-width: 850px;
-      margin-bottom: 50px;
-    }
-
+    .section { padding: 120px 0; }
+    .section-heading { max-width: 900px; margin-bottom: 55px; }
     .section-heading h2 {
-      margin-top: 18px;
-
+      margin-top: 20px;
       font-family: "Manrope", sans-serif;
-      font-size: clamp(42px, 6vw, 88px);
+      font-size: clamp(44px, 6.2vw, 90px);
       line-height: .96;
       letter-spacing: -.055em;
       font-weight: 800;
     }
-
     .section-heading p {
-      margin-top: 24px;
-      max-width: 680px;
-
+      margin-top: 26px;
+      max-width: 720px;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.75;
+      font-size: 18px;
+      line-height: 1.8;
     }
-
 
     /* ==================================================
        HEADER
     ================================================== */
-
     .header {
       position: sticky;
       top: 0;
       z-index: 1000;
-
       border-bottom: 1px solid var(--border);
-
-      background:
-        color-mix(
-          in srgb,
-          var(--bg) 86%,
-          transparent
-        );
-
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
     }
-
     .nav {
       min-height: 82px;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 25px;
     }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 13px;
-      min-width: 0;
-    }
-
+    .brand { display: inline-flex; align-items: center; gap: 13px; min-width: 0; }
     .brand-mark {
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-      place-items: center;
-
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
       border-radius: 13px;
       background: var(--accent);
       color: var(--accent-text);
-
       font-family: "Manrope", sans-serif;
-      font-size: 15px;
-      font-weight: 800;
+      font-size: 15px; font-weight: 800;
       letter-spacing: -.08em;
     }
-
-    .brand-copy {
-      min-width: 0;
-    }
-
+    .brand-copy { min-width: 0; }
     .brand-title {
       font-family: "Manrope", sans-serif;
-      font-weight: 800;
-      font-size: 15px;
+      font-weight: 800; font-size: 16px;
       letter-spacing: -.02em;
     }
-
     .brand-subtitle {
       margin-top: 1px;
-
       color: var(--muted-2);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
     }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
     .icon-btn {
-      width: 44px;
-      height: 44px;
-
-      display: grid;
-      place-items: center;
-
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
       border: 1px solid var(--border);
       border-radius: 50%;
-
       background: var(--surface);
       color: var(--text);
-
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
-
-    .icon-btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-    }
-
-    .icon-btn svg {
-      width: 19px;
-      height: 19px;
-    }
-
+    .icon-btn:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+    .icon-btn svg { width: 19px; height: 19px; }
 
     /* ==================================================
        HERO
     ================================================== */
-
-    .hero {
-      padding:
-        100px 0
-        75px;
-    }
-
+    .hero { padding: 100px 0 75px; }
     .hero-grid {
       display: grid;
-      grid-template-columns:
-        minmax(0, 1.35fr)
-        minmax(280px, .65fr);
-
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
       gap: 60px;
       align-items: end;
     }
-
     .hero h1 {
-      margin-top: 22px;
-
+      margin-top: 24px;
       max-width: 1050px;
-
       font-family: "Manrope", sans-serif;
-      font-size: clamp(58px, 9vw, 145px);
-      line-height: .87;
+      font-size: clamp(56px, 9vw, 148px);
+      line-height: .86;
       letter-spacing: -.075em;
       font-weight: 800;
     }
-
-    .hero h1 span {
-      color: var(--muted-2);
-    }
-
+    .hero h1 span { color: var(--muted-2); }
     .hero-description {
-      max-width: 530px;
+      max-width: 560px;
       margin-left: auto;
-
       color: var(--muted);
-      font-size: 18px;
-      line-height: 1.75;
+      font-size: 19px;
+      line-height: 1.8;
     }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 25px;
-    }
-
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
     .meta-pill {
-      padding: 9px 13px;
-
+      padding: 9px 14px;
       border: 1px solid var(--border);
       border-radius: 999px;
-
       background: var(--surface);
-
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 13px; font-weight: 700;
     }
-
 
     /* ==================================================
-       MARQUEE
+       MARQUEE — ULTRA SLOW
     ================================================== */
-
     .marquee {
-      width: 100%;
-      overflow: hidden;
-
+      width: 100%; overflow: hidden;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-
       background: var(--surface);
     }
-
     .marquee-track {
       width: max-content;
-
-      display: flex;
-      align-items: center;
-
-      animation: marquee 26s linear infinite;
+      display: flex; align-items: center;
+      animation: marquee 150s linear infinite;
+      will-change: transform;
     }
-
+    .marquee:hover .marquee-track { animation-play-state: paused; }
     .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-
-      padding: 21px 30px;
-
+      display: flex; align-items: center; gap: 32px;
+      padding: 22px 32px;
       font-family: "Manrope", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      font-size: 15px; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase;
+      white-space: nowrap;
     }
-
-    .marquee-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--text);
-    }
-
+    .marquee-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text); }
     @keyframes marquee {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
-
 
     /* ==================================================
        ENGINE
     ================================================== */
-
-    .engine-section {
-      padding: 85px 0 110px;
-    }
-
+    .engine-section { padding: 85px 0 110px; }
     .engine-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 30px;
-
-      margin-bottom: 26px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 30px; margin-bottom: 26px;
     }
-
     .engine-title h2 {
-      margin-top: 14px;
-
+      margin-top: 16px;
       font-family: "Manrope", sans-serif;
-      font-size: clamp(34px, 5vw, 65px);
-      line-height: .98;
-      letter-spacing: -.055em;
-      font-weight: 800;
+      font-size: clamp(38px, 5.5vw, 72px);
+      line-height: .98; letter-spacing: -.055em; font-weight: 800;
     }
-
     .engine-title p {
-      margin-top: 13px;
-
+      margin-top: 15px;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 16px;
     }
-
     .engine-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 10px 13px;
-
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
       border: 1px solid var(--border);
       border-radius: 999px;
-
       color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase;
       white-space: nowrap;
     }
-
     .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
+      width: 7px; height: 7px; border-radius: 50%;
       background: var(--success);
       box-shadow: 0 0 0 4px rgba(35,122,75,.10);
     }
 
+    /* URL FIELD */
     .url-field {
-      width: min(
-        calc(100% - 32px),
-        1400px
-      );
-
+      width: min(calc(100% - 32px), 1400px);
       min-height: 112px;
       margin-inline: auto;
-
-      display: flex;
-      align-items: center;
-      gap: 18px;
-
-      padding:
-        14px
-        16px
-        14px
-        28px;
-
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 14px 14px 26px;
       border: 1px solid var(--border);
       border-radius: 30px;
-
       background: var(--surface);
       box-shadow: var(--shadow);
-
-      transition:
-        border-color .25s ease,
-        box-shadow .25s ease,
-        transform .25s ease;
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
     }
-
     .url-field:focus-within {
       border-color: var(--border-strong);
-
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.10);
-
+      box-shadow: 0 25px 80px rgba(0,0,0,.10);
       transform: translateY(-2px);
     }
-
     .url-icon {
       flex: 0 0 auto;
-
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
       border-radius: 15px;
       background: var(--soft);
     }
+    .url-icon svg { width: 21px; height: 21px; }
 
-    .url-icon svg {
-      width: 21px;
-      height: 21px;
+    .url-input-wrap {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
     }
-
     #urlInput {
+      width: 100%;
       min-width: 0;
       flex: 1;
-
-      border: 0;
-      outline: 0;
-
+      padding-right: 42px;
+      border: 0; outline: 0;
       background: transparent;
       color: var(--text);
-
       font-size: clamp(16px, 2vw, 21px);
       font-weight: 500;
+      text-overflow: ellipsis;
     }
+    #urlInput::placeholder { color: var(--muted-2); }
 
-    #urlInput::placeholder {
-      color: var(--muted-2);
+    .url-clear {
+      position: absolute;
+      right: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px;
+      display: grid; place-items: center;
+      border: 0; border-radius: 50%;
+      background: var(--soft);
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .2s;
     }
+    .url-clear:hover { background: var(--border-strong); color: var(--text); }
+    .url-clear:active { transform: translateY(-50%) scale(.9); }
+    .url-clear svg { width: 12px; height: 12px; }
+    .url-clear[hidden] { display: none; }
 
     .lookup-btn {
-      min-height: 78px;
-      min-width: 190px;
-
+      min-height: 76px; min-width: 185px;
       padding: 0 28px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-
-      border: 0;
-      border-radius: 21px;
-
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 0; border-radius: 21px;
       background: var(--accent);
       color: var(--accent-text);
-
       font-family: "Manrope", sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-
-      transition:
-        transform .2s ease,
-        opacity .2s ease;
+      font-size: 16px; font-weight: 800;
+      transition: transform .2s ease, opacity .2s ease;
     }
-
-    .lookup-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .lookup-btn:active {
-      transform: scale(.98);
-    }
-
-    .lookup-btn:disabled {
-      cursor: wait;
-      opacity: .55;
-    }
-
-    .lookup-btn svg {
-      width: 18px;
-      height: 18px;
-    }
+    .lookup-btn:hover { transform: translateY(-2px); }
+    .lookup-btn:active { transform: scale(.98); }
+    .lookup-btn:disabled { cursor: wait; opacity: .55; }
+    .lookup-btn svg { width: 18px; height: 18px; }
 
     .engine-note {
-      width: min(
-        calc(100% - 32px),
-        1400px
-      );
-
+      width: min(calc(100% - 32px), 1400px);
       margin: 16px auto 0;
-
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-
+      display: flex; justify-content: space-between; gap: 20px;
       color: var(--muted-2);
-      font-size: 12px;
+      font-size: 13px;
     }
 
-
-    /* ==================================================
-       LOADING
-    ================================================== */
-
+    /* LOADING */
     .loading {
       display: none;
-
-      width: min(
-        calc(100% - 32px),
-        1400px
-      );
-
+      width: min(calc(100% - 32px), 1400px);
       margin: 28px auto 0;
-
       padding: 30px;
-
       border: 1px solid var(--border);
       border-radius: 24px;
-
       background: var(--surface);
     }
-
-    .loading.show {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
+    .loading.show { display: flex; align-items: center; gap: 15px; }
     .spinner {
-      width: 25px;
-      height: 25px;
-
+      width: 25px; height: 25px;
       border: 3px solid var(--border);
       border-top-color: var(--text);
       border-radius: 50%;
-
       animation: spin .75s linear infinite;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading strong { display: block; font-family: "Manrope", sans-serif; font-size: 15px; }
+    .loading span { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .loading strong {
-      display: block;
-      font-family: "Manrope", sans-serif;
-      font-size: 14px;
-    }
-
-    .loading span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-
-    /* ==================================================
-       ERROR
-    ================================================== */
-
+    /* ERROR */
     .error-box {
       display: none;
-
-      width: min(
-        calc(100% - 32px),
-        1400px
-      );
-
+      width: min(calc(100% - 32px), 1400px);
       margin: 28px auto 0;
-
       padding: 24px;
-
       border: 1px solid rgba(181,45,45,.18);
       border-radius: 22px;
-
       background: rgba(181,45,45,.06);
       color: var(--danger);
     }
-
-    .error-box.show {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-
+    .error-box.show { display: flex; align-items: flex-start; gap: 14px; }
     .error-icon {
-      width: 35px;
-      height: 35px;
-
+      width: 35px; height: 35px;
       flex: 0 0 auto;
-
-      display: grid;
-      place-items: center;
-
+      display: grid; place-items: center;
       border-radius: 11px;
       background: rgba(181,45,45,.10);
     }
+    .error-box strong { display: block; font-family: "Manrope", sans-serif; font-size: 15px; }
+    .error-box p { margin-top: 3px; color: var(--muted); font-size: 14px; }
 
-    .error-box strong {
-      display: block;
-
-      font-family: "Manrope", sans-serif;
-      font-size: 14px;
-    }
-
-    .error-box p {
-      margin-top: 3px;
-
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-
-    /* ==================================================
-       RESULT
-    ================================================== */
-
+    /* RESULT */
     .result {
       display: none;
-
-      width: min(
-        calc(100% - 32px),
-        1400px
-      );
-
+      width: min(calc(100% - 32px), 1400px);
       margin: 28px auto 0;
-
       overflow: hidden;
-
       border: 1px solid var(--border);
       border-radius: 32px;
-
       background: var(--surface-solid);
       box-shadow: var(--shadow);
     }
-
-    .result.show {
-      display: block;
-      animation: resultIn .4s ease both;
-    }
-
+    .result.show { display: block; animation: resultIn .4s ease both; }
     @keyframes resultIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
     .result-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-
+      display: flex; justify-content: space-between; gap: 30px;
       padding: 34px;
-
       border-bottom: 1px solid var(--border);
     }
-
     .result-label {
       color: var(--muted-2);
-
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+      font-size: 12px; font-weight: 800;
+      letter-spacing: .13em; text-transform: uppercase;
     }
-
     .result-name {
-      margin-top: 9px;
-
+      margin-top: 10px;
       max-width: 900px;
-
       font-family: "Manrope", sans-serif;
-      font-size: clamp(25px, 4vw, 48px);
-      line-height: 1;
+      font-size: clamp(26px, 4.2vw, 50px);
+      line-height: 1.02;
       letter-spacing: -.045em;
       font-weight: 800;
-
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
-
     .result-badge {
       align-self: flex-start;
-
-      padding: 9px 12px;
-
+      padding: 9px 13px;
       border-radius: 999px;
       background: rgba(35,122,75,.09);
       color: var(--success);
-
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 11px; font-weight: 800;
       white-space: nowrap;
     }
-
     .result-grid {
       display: grid;
-      grid-template-columns:
-        repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
-
     .result-stat {
       min-width: 0;
       padding: 27px 34px;
-
       border-right: 1px solid var(--border);
     }
-
-    .result-stat:last-child {
-      border-right: 0;
-    }
-
+    .result-stat:last-child { border-right: 0; }
     .result-stat span {
       display: block;
-
       color: var(--muted-2);
-
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .09em;
-      text-transform: uppercase;
+      font-size: 12px; font-weight: 800;
+      letter-spacing: .1em; text-transform: uppercase;
     }
-
     .result-stat strong {
       display: block;
-
-      margin-top: 7px;
-
+      margin-top: 8px;
       color: var(--text);
-
-      font-size: 17px;
-      font-weight: 700;
-
+      font-size: 18px; font-weight: 700;
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
-
     .result-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-
+      display: flex; flex-wrap: wrap; gap: 10px;
       padding: 25px 34px;
-
       border-top: 1px solid var(--border);
       background: var(--soft);
     }
-
     .action-btn {
-      min-height: 49px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      padding: 0 17px;
-
+      min-height: 50px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 0 18px;
       border: 1px solid var(--border);
       border-radius: 14px;
-
       background: var(--surface-solid);
       color: var(--text);
-
-      font-size: 13px;
-      font-weight: 800;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
+      font-size: 14px; font-weight: 800;
+      transition: transform .2s ease, border-color .2s ease;
     }
-
-    .action-btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-    }
-
-    .action-btn.primary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--accent-text);
-    }
-
-    .action-btn svg {
-      width: 17px;
-      height: 17px;
-    }
-
+    .action-btn:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+    .action-btn.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-text); }
+    .action-btn svg { width: 17px; height: 17px; }
 
     /* ==================================================
-       RECENT
+       RECENT — URL wrapped to 2 lines
     ================================================== */
-
-    .recent {
-      margin-top: 45px;
-    }
-
+    .recent { margin-top: 45px; }
     .recent-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-
-      margin-bottom: 18px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; margin-bottom: 20px;
     }
-
     .recent-header h3 {
       font-family: "Manrope", sans-serif;
-      font-size: 17px;
-      font-weight: 800;
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -.02em;
     }
-
     .clear-recent {
-      border: 0;
-      background: transparent;
+      border: 0; background: transparent;
       color: var(--muted);
-
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 13px; font-weight: 700;
     }
-
-    .clear-recent:hover {
-      color: var(--text);
-    }
-
+    .clear-recent:hover { color: var(--text); }
     .recent-list {
       display: grid;
-      grid-template-columns:
-        repeat(3, minmax(0,1fr));
-
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 12px;
     }
-
     .recent-item {
       width: 100%;
-
+      min-width: 0;
       padding: 18px;
-
       text-align: left;
-
       border: 1px solid var(--border);
       border-radius: 18px;
-
       background: var(--surface);
-
       color: var(--text);
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
+      overflow: hidden;
+      transition: transform .2s ease, border-color .2s ease;
     }
-
-    .recent-item:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-    }
-
+    .recent-item:hover { transform: translateY(-2px); border-color: var(--border-strong); }
     .recent-item strong {
       display: block;
-
-      font-size: 13px;
-      font-weight: 800;
-
+      max-width: 100%;
+      font-size: 14px; font-weight: 800;
+      line-height: 1.35;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
     .recent-item span {
-      display: block;
-
-      margin-top: 5px;
-
+      display: -webkit-box;
+      max-width: 100%;
+      margin-top: 6px;
       color: var(--muted);
-
-      font-size: 11px;
-
+      font-size: 12px;
+      line-height: 1.5;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      overflow-wrap: anywhere;
+      word-break: break-all;
     }
-
     .recent-empty {
       padding: 30px;
-
       border: 1px dashed var(--border-strong);
       border-radius: 18px;
-
       color: var(--muted);
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
     }
 
-
-    /* ==================================================
-       STATEMENT
-    ================================================== */
-
+    /* STATEMENT */
     .statement {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-
     .statement-inner {
       padding: 125px 0;
-
       display: grid;
       grid-template-columns: .65fr 1.35fr;
       gap: 70px;
     }
-
     .statement-number {
       color: var(--muted-2);
-
       font-family: "Manrope", sans-serif;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 15px; font-weight: 800;
+      letter-spacing: .04em;
     }
-
     .statement h2 {
       max-width: 1000px;
-
       font-family: "Manrope", sans-serif;
-      font-size: clamp(38px, 6vw, 85px);
-      line-height: .97;
-      letter-spacing: -.06em;
-      font-weight: 800;
+      font-size: clamp(38px, 6.2vw, 88px);
+      line-height: .98; letter-spacing: -.06em; font-weight: 800;
     }
+    .statement h2 span { color: var(--muted-2); }
 
-    .statement h2 span {
-      color: var(--muted-2);
-    }
-
-
-    /* ==================================================
-       FEATURES
-    ================================================== */
-
+    /* FEATURES */
     .features-grid {
       display: grid;
-      grid-template-columns:
-        repeat(3, minmax(0,1fr));
-
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 1px;
-
       border: 1px solid var(--border);
       background: var(--border);
     }
-
     .feature {
-      min-height: 300px;
-
-      padding: 35px;
-
+      min-height: 320px;
+      padding: 38px;
       background: var(--bg);
     }
-
     .feature-icon {
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
+      width: 50px; height: 50px;
+      display: grid; place-items: center;
       border: 1px solid var(--border);
       border-radius: 15px;
-
       background: var(--surface);
     }
-
-    .feature-icon svg {
-      width: 21px;
-      height: 21px;
-    }
-
+    .feature-icon svg { width: 22px; height: 22px; }
     .feature h3 {
-      margin-top: 70px;
-
+      margin-top: 75px;
       font-family: "Manrope", sans-serif;
-      font-size: 22px;
-      letter-spacing: -.025em;
-      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -.028em; font-weight: 800;
     }
-
     .feature p {
-      margin-top: 10px;
-
-      max-width: 400px;
-
+      margin-top: 12px;
+      max-width: 420px;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 15px; line-height: 1.75;
     }
 
-
-    /* ==================================================
-       FAQ
-    ================================================== */
-
+    /* FAQ */
     .faq-list {
       max-width: 1000px;
-
       margin-left: auto;
-
       border-top: 1px solid var(--border);
     }
-
-    .faq {
-      border-bottom: 1px solid var(--border);
-    }
-
+    .faq { border-bottom: 1px solid var(--border); }
     .faq-question {
       width: 100%;
-
-      padding: 25px 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 26px 0;
+      display: flex; align-items: center; justify-content: space-between;
       gap: 25px;
-
-      border: 0;
-      background: transparent;
-
-      color: var(--text);
-
-      text-align: left;
-
+      border: 0; background: transparent;
+      color: var(--text); text-align: left;
       font-family: "Manrope", sans-serif;
-      font-size: 18px;
-      font-weight: 800;
+      font-size: 19px; font-weight: 800;
     }
-
     .faq-plus {
-      width: 32px;
-      height: 32px;
-
+      width: 32px; height: 32px;
       flex: 0 0 auto;
-
-      display: grid;
-      place-items: center;
-
+      display: grid; place-items: center;
       border: 1px solid var(--border);
       border-radius: 50%;
-
       transition: transform .25s ease;
     }
-
-    .faq.open .faq-plus {
-      transform: rotate(45deg);
-    }
-
+    .faq.open .faq-plus { transform: rotate(45deg); }
     .faq-answer {
       display: grid;
       grid-template-rows: 0fr;
-
       transition: grid-template-rows .3s ease;
     }
-
-    .faq.open .faq-answer {
-      grid-template-rows: 1fr;
-    }
-
-    .faq-answer-inner {
-      overflow: hidden;
-    }
-
+    .faq.open .faq-answer { grid-template-rows: 1fr; }
+    .faq-answer-inner { overflow: hidden; }
     .faq-answer p {
-      padding: 0 65px 25px 0;
-
+      padding: 0 65px 26px 0;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 15px; line-height: 1.85;
     }
 
-
-    /* ==================================================
-       CTA
-    ================================================== */
-
-    .cta {
-      padding: 80px 0 130px;
-    }
-
+    /* CTA */
+    .cta { padding: 80px 0 130px; }
     .cta-box {
-      position: relative;
-      overflow: hidden;
-
+      position: relative; overflow: hidden;
       padding: clamp(40px, 7vw, 90px);
-
       border-radius: 38px;
-
       background: var(--accent);
       color: var(--accent-text);
     }
-
     .cta-box::after {
       content: "ZXH";
-
       position: absolute;
-      right: -30px;
-      bottom: -80px;
-
+      right: -30px; bottom: -80px;
       font-family: "Manrope", sans-serif;
       font-size: clamp(180px, 30vw, 450px);
-      line-height: 1;
-      letter-spacing: -.12em;
-
-      opacity: .055;
-      pointer-events: none;
+      line-height: 1; letter-spacing: -.12em;
+      opacity: .055; pointer-events: none;
     }
-
-    .cta-box .eyebrow {
-      color: inherit;
-      opacity: .65;
-    }
-
+    .cta-box .eyebrow { color: inherit; opacity: .65; }
     .cta-box h2 {
-      position: relative;
-      z-index: 1;
-
-      max-width: 1000px;
-      margin-top: 20px;
-
+      position: relative; z-index: 1;
+      max-width: 1000px; margin-top: 20px;
       font-family: "Manrope", sans-serif;
       font-size: clamp(44px, 7vw, 100px);
-      line-height: .92;
-      letter-spacing: -.065em;
-      font-weight: 800;
+      line-height: .92; letter-spacing: -.065em; font-weight: 800;
     }
-
     .cta-box p {
-      position: relative;
-      z-index: 1;
-
-      max-width: 620px;
-      margin-top: 25px;
-
+      position: relative; z-index: 1;
+      max-width: 620px; margin-top: 25px;
       opacity: .68;
-
-      font-size: 16px;
-      line-height: 1.7;
+      font-size: 17px; line-height: 1.75;
     }
-
     .cta-button {
-      position: relative;
-      z-index: 1;
-
+      position: relative; z-index: 1;
       margin-top: 35px;
-
-      min-height: 55px;
-      padding: 0 22px;
-
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      border: 0;
-      border-radius: 15px;
-
+      min-height: 55px; padding: 0 22px;
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 0; border-radius: 15px;
       background: var(--accent-text);
       color: var(--accent);
-
-      font-size: 13px;
-      font-weight: 800;
+      font-size: 14px; font-weight: 800;
     }
 
-
-    /* ==================================================
-       FOOTER
-    ================================================== */
-
-    footer {
-      border-top: 1px solid var(--border);
-    }
-
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); }
     .footer-main {
       padding: 60px 0 40px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      display: flex; justify-content: space-between; align-items: flex-start;
       gap: 50px;
     }
-
-    .footer-brand {
-      max-width: 430px;
-    }
-
+    .footer-brand { max-width: 430px; }
     .footer-brand h3 {
       font-family: "Manrope", sans-serif;
-      font-size: 25px;
-      font-weight: 800;
+      font-size: 26px; font-weight: 800;
       letter-spacing: -.035em;
     }
-
     .footer-brand p {
       margin-top: 10px;
-
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
+      color: var(--muted); font-size: 14px; line-height: 1.75;
     }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .footer-links a:hover {
-      color: var(--text);
-    }
-
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .footer-links a:hover { color: var(--text); }
     .footer-bottom {
       padding: 20px 0;
-
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-
+      display: flex; justify-content: space-between; gap: 20px;
       border-top: 1px solid var(--border);
-
       color: var(--muted-2);
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 12px; font-weight: 700;
     }
 
-
-    /* ==================================================
-       TOAST
-    ================================================== */
-
+    /* TOAST */
     .toast {
       position: fixed;
-      left: 50%;
-      bottom: 25px;
+      left: 50%; bottom: 25px;
       z-index: 3000;
-
       width: max-content;
       max-width: calc(100% - 30px);
-
-      padding: 13px 17px;
-
-      transform:
-        translate(-50%, 30px);
-
-      opacity: 0;
-      pointer-events: none;
-
+      padding: 13px 18px;
+      transform: translate(-50%, 30px);
+      opacity: 0; pointer-events: none;
       border: 1px solid var(--border);
       border-radius: 999px;
-
       background: var(--surface-solid);
       box-shadow: var(--shadow-soft);
-
       color: var(--text);
-
-      font-size: 12px;
-      font-weight: 700;
-
-      transition:
-        opacity .25s ease,
-        transform .25s ease;
+      font-size: 13px; font-weight: 700;
+      transition: opacity .25s ease, transform .25s ease;
     }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-    .toast.show {
-      opacity: 1;
-      transform:
-        translate(-50%, 0);
-    }
-
-
-    /* ==================================================
-       PWA INSTALL
-    ================================================== */
-
-    .install-popup {
+    /* PWA INSTALL POPUP */
+    .popup-overlay {
       position: fixed;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      z-index: 2500;
-
+      inset: 0;
+      z-index: 3500;
       display: none;
-
-      max-width: 560px;
-      margin-left: auto;
-
-      padding: 20px;
-
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation: popupFade .3s ease both;
+    }
+    .popup-overlay.show { display: flex; }
+    @keyframes popupFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .popup-content {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding: 28px 22px 22px;
       border: 1px solid var(--border);
-      border-radius: 24px;
-
+      border-radius: 26px;
       background: var(--surface-solid);
-      box-shadow: 0 25px 80px rgba(0,0,0,.18);
-
-      animation: installIn .35s ease both;
+      box-shadow: 0 25px 80px rgba(0,0,0,.28);
+      text-align: center;
+      animation: popupIn .35s ease both;
     }
-
-    .install-popup.show {
-      display: block;
+    @keyframes popupIn {
+      from { opacity: 0; transform: translateY(28px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-
-    @keyframes installIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .install-row {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .install-logo {
-      width: 48px;
-      height: 48px;
-
-      flex: 0 0 auto;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 15px;
-
-      background: var(--accent);
-      color: var(--accent-text);
-
-      font-family: "Manrope", sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .install-copy {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .install-copy strong {
-      display: block;
-
-      font-family: "Manrope", sans-serif;
-      font-size: 14px;
-    }
-
-    .install-copy span {
-      display: block;
-      margin-top: 3px;
-
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .install-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .install-actions button {
-      flex: 1;
-
-      min-height: 44px;
-
+    .popup-close-btn {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
       border: 1px solid var(--border);
-      border-radius: 12px;
-
+      border-radius: 50%;
       background: var(--surface);
       color: var(--text);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .popup-close-btn:hover { transform: rotate(90deg); border-color: var(--border-strong); }
+    .popup-close-btn svg { width: 14px; height: 14px; }
 
-      font-size: 12px;
-      font-weight: 800;
+    .install-prompt-icon {
+      width: 84px; height: 84px;
+      margin: 0 auto 18px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--soft);
+      box-shadow: var(--shadow-soft);
+    }
+    .install-prompt-icon img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
     }
 
-    .install-actions .install-now {
-      border-color: var(--accent);
+    .popup-content h2 {
+      font-family: "Manrope", sans-serif;
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      padding: 0 12px;
+    }
+    .popup-content p {
+      color: var(--muted);
+      font-size: 14px; line-height: 1.65;
+      margin-bottom: 22px;
+      padding: 0 8px;
+    }
+
+    .install-prompt-btn {
+      width: 100%;
+      min-height: 54px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 0; border-radius: 16px;
       background: var(--accent);
       color: var(--accent-text);
+      font-family: "Manrope", sans-serif;
+      font-size: 16px; font-weight: 800;
+      transition: transform .2s ease, opacity .2s ease;
     }
+    .install-prompt-btn:hover { transform: translateY(-2px); }
+    .install-prompt-btn:active { transform: scale(.98); }
+    .install-prompt-btn svg { width: 18px; height: 18px; }
 
+    .install-prompt-not-now {
+      margin-top: 10px;
+      width: 100%;
+      min-height: 44px;
+      border: 0; background: transparent;
+      color: var(--muted);
+      font-size: 13px; font-weight: 700;
+      transition: color .2s;
+    }
+    .install-prompt-not-now:hover { color: var(--text); }
 
-    /* ==================================================
-       UPDATE BANNER
-    ================================================== */
-
+    /* UPDATE BANNER */
     .update-banner {
       position: fixed;
-      top: 95px;
-      left: 50%;
+      top: 95px; left: 50%;
       z-index: 2200;
-
-      width: min(
-        calc(100% - 30px),
-        500px
-      );
-
+      width: min(calc(100% - 30px), 500px);
       padding: 14px 16px;
-
-      display: none;
-      align-items: center;
-      gap: 12px;
-
+      display: none; align-items: center; gap: 12px;
       transform: translateX(-50%);
-
       border: 1px solid var(--border);
       border-radius: 16px;
-
       background: var(--surface-solid);
       box-shadow: var(--shadow);
-
-      font-size: 12px;
+      font-size: 13px;
     }
-
-    .update-banner.show {
-      display: flex;
-    }
-
-    .update-banner span {
-      flex: 1;
-      color: var(--muted);
-    }
-
+    .update-banner.show { display: flex; }
+    .update-banner span { flex: 1; color: var(--muted); }
     .update-banner button {
-      border: 0;
-      border-radius: 10px;
-
-      padding: 9px 12px;
-
+      border: 0; border-radius: 10px;
+      padding: 9px 13px;
       background: var(--accent);
       color: var(--accent-text);
-
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 12px; font-weight: 800;
     }
-
 
     /* ==================================================
        RESPONSIVE
     ================================================== */
-
     @media (max-width: 1000px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-description {
-        margin-left: 0;
-      }
-
-      .statement-inner {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .features-grid {
-        grid-template-columns:
-          repeat(2, minmax(0,1fr));
-      }
-
-      .recent-list {
-        grid-template-columns:
-          repeat(2, minmax(0,1fr));
-      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-description { margin-left: 0; }
+      .statement-inner { grid-template-columns: 1fr; gap: 25px; }
+      .features-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .recent-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
 
     @media (max-width: 760px) {
-      .container {
-        width: min(
-          calc(100% - 28px),
-          var(--max)
-        );
-      }
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .section { padding: 80px 0; }
+      .hero { padding: 70px 0 55px; }
+      .hero h1 { font-size: clamp(54px, 16vw, 88px); }
+      .engine-section { padding: 60px 0 80px; }
+      .engine-header { align-items: flex-start; flex-direction: column; gap: 18px; }
 
-      .section {
-        padding: 80px 0;
-      }
-
-      .hero {
-        padding: 70px 0 55px;
-      }
-
-      .hero h1 {
-        font-size: clamp(
-          54px,
-          17vw,
-          90px
-        );
-      }
-
-      .engine-section {
-        padding: 60px 0 80px;
-      }
-
-      .engine-header {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 18px;
-      }
+      .marquee-track { animation-duration: 200s; }
+      .marquee-item { padding: 20px 26px; font-size: 14px; gap: 26px; }
 
       .url-field {
         width: 100%;
         min-height: auto;
-
         align-items: stretch;
         flex-direction: column;
-
         padding: 15px;
-
         border-radius: 24px;
       }
+      .url-icon { display: none; }
+      .url-input-wrap { width: 100%; }
+      #urlInput { width: 100%; min-height: 56px; padding: 0 42px 0 6px; font-size: 16px; }
+      .url-clear { right: 6px; width: 26px; height: 26px; }
+      .lookup-btn { width: 100%; min-height: 56px; border-radius: 16px; }
+      .engine-note { width: 100%; flex-direction: column; gap: 7px; }
 
-      .url-icon {
-        display: none;
-      }
-
-      #urlInput {
-        width: 100%;
-        min-height: 58px;
-
-        padding: 0 7px;
-      }
-
-      .lookup-btn {
-        width: 100%;
-        min-height: 58px;
-        border-radius: 16px;
-      }
-
-      .engine-note {
-        width: 100%;
-
-        flex-direction: column;
-        gap: 7px;
-      }
-
-      .loading,
-      .error-box,
-      .result {
-        width: 100%;
-      }
-
-      .result-top {
-        padding: 25px;
-        flex-direction: column;
-        gap: 17px;
-      }
-
-      .result-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .loading, .error-box, .result { width: 100%; }
+      .result-top { padding: 25px; flex-direction: column; gap: 17px; }
+      .result-grid { grid-template-columns: 1fr; }
       .result-stat {
         padding: 20px 25px;
         border-right: 0;
         border-bottom: 1px solid var(--border);
       }
+      .result-stat:last-child { border-bottom: 0; }
+      .result-actions { padding: 20px 25px; }
+      .action-btn { flex: 1 1 calc(50% - 10px); }
 
-      .result-stat:last-child {
-        border-bottom: 0;
-      }
+      .recent-list { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature { min-height: 250px; }
+      .feature h3 { margin-top: 55px; }
 
-      .result-actions {
-        padding: 20px 25px;
-      }
+      .footer-main, .footer-bottom { flex-direction: column; }
+      .footer-links { gap: 13px 20px; }
 
-      .action-btn {
-        flex: 1 1 calc(50% - 10px);
-      }
+      .cta { padding: 50px 0 80px; }
+      .cta-box { border-radius: 28px; }
 
-      .recent-list {
-        grid-template-columns: 1fr;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature {
-        min-height: 250px;
-      }
-
-      .feature h3 {
-        margin-top: 55px;
-      }
-
-      .footer-main,
-      .footer-bottom {
-        flex-direction: column;
-      }
-
-      .footer-links {
-        gap: 13px 20px;
-      }
-
-      .cta {
-        padding: 50px 0 80px;
-      }
-
-      .cta-box {
-        border-radius: 28px;
-      }
+      .preloader-logo { width: 72px; height: 72px; font-size: 22px; }
+      .preloader-title { font-size: 15px; letter-spacing: .14em; }
+      .preloader-bar { width: 180px; }
     }
 
     @media (max-width: 480px) {
-      .nav {
-        min-height: 72px;
-      }
-
-      .brand-mark {
-        width: 39px;
-        height: 39px;
-      }
-
-      .brand-title {
-        font-size: 13px;
-      }
-
-      .brand-subtitle {
-        font-size: 8px;
-      }
-
-      .nav-actions {
-        gap: 7px;
-      }
-
-      .icon-btn {
-        width: 40px;
-        height: 40px;
-      }
-
-      .hero h1 {
-        font-size: 52px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .result-actions {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-
-      .action-btn {
-        width: 100%;
-      }
-
-      .statement-inner {
-        padding: 80px 0;
-      }
-
-      .faq-question {
-        font-size: 16px;
-      }
-
-      .install-popup {
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-      }
+      .nav { min-height: 72px; }
+      .brand-mark { width: 39px; height: 39px; }
+      .brand-title { font-size: 14px; }
+      .brand-subtitle { font-size: 8px; }
+      .nav-actions { gap: 7px; }
+      .icon-btn { width: 40px; height: 40px; }
+      .hero h1 { font-size: 50px; }
+      .hero-description { font-size: 15px; }
+      .result-actions { display: grid; grid-template-columns: 1fr; }
+      .action-btn { width: 100%; }
+      .statement-inner { padding: 80px 0; }
+      .faq-question { font-size: 16px; }
+      .popup-content { padding: 24px 18px 18px; border-radius: 22px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         transition-duration: .01ms !important;
@@ -1886,2273 +1072,929 @@
 
 <body>
 
-  <!-- ==================================================
-       HEADER
-  ================================================== -->
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo">ZXH</div>
+      <div class="preloader-title">ZXH OFFICIAL</div>
+      <div class="preloader-sub">INITIALIZING ENGINE</div>
+      <div class="preloader-bar"></div>
+    </div>
+  </div>
 
+  <!-- HEADER -->
   <header class="header">
     <div class="container nav">
-
-      <a
-        href="/"
-        class="brand"
-        aria-label="ZXH OFFICIAL Home"
-      >
+      <a href="/" class="brand" aria-label="ZXH OFFICIAL Home">
         <div class="brand-mark">ZXH</div>
-
         <div class="brand-copy">
-          <div class="brand-title">
-            ZXH OFFICIAL
-          </div>
-
-          <div class="brand-subtitle">
-            MediaFire Engine
-          </div>
+          <div class="brand-title">ZXH OFFICIAL</div>
+          <div class="brand-subtitle">MediaFire Engine</div>
         </div>
       </a>
-
       <div class="nav-actions">
-
-        <button
-          class="icon-btn"
-          id="themeBtn"
-          type="button"
-          aria-label="Toggle theme"
-          title="Toggle theme"
-        >
-          <svg
-            id="themeIcon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="m4.93 4.93 1.42 1.42"></path>
-            <path d="m17.65 17.65 1.42 1.42"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-            <path d="m6.35 17.65-1.42 1.42"></path>
-            <path d="m19.07 4.93-1.42 1.42"></path>
+            <path d="M12 2v2"></path><path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.42 1.42"></path><path d="m17.65 17.65 1.42 1.42"></path>
+            <path d="M2 12h2"></path><path d="M20 12h2"></path>
+            <path d="m6.35 17.65-1.42 1.42"></path><path d="m19.07 4.93-1.42 1.42"></path>
           </svg>
         </button>
-
       </div>
-
     </div>
   </header>
 
-
-  <!-- ==================================================
-       HERO
-  ================================================== -->
-
   <main>
 
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
-
         <div>
-          <div class="eyebrow">
-            ZXH OFFICIAL / FILE ACCESS
-          </div>
-
-          <h1>
-            MediaFire
-            <span>made simple.</span>
-          </h1>
+          <div class="eyebrow">ZXH OFFICIAL / FILE ACCESS</div>
+          <h1>MediaFire <span>made simple.</span></h1>
         </div>
-
         <div class="hero-description">
-
           <p>
             Paste a public MediaFire file URL.
             ZXH OFFICIAL will inspect the page,
             extract the available file information
             and prepare the available download link.
           </p>
-
           <div class="hero-meta">
-            <span class="meta-pill">
-              No Account
-            </span>
-
-            <span class="meta-pill">
-              Fast Lookup
-            </span>
-
-            <span class="meta-pill">
-              Responsive
-            </span>
-
-            <span class="meta-pill">
-              PWA Ready
-            </span>
+            <span class="meta-pill">No Account</span>
+            <span class="meta-pill">Fast Lookup</span>
+            <span class="meta-pill">Responsive</span>
+            <span class="meta-pill">PWA Ready</span>
           </div>
-
         </div>
-
       </div>
     </section>
 
-
-    <!-- ==================================================
-         MARQUEE
-    ================================================== -->
-
+    <!-- MARQUEE -->
     <div class="marquee">
       <div class="marquee-track">
-
         <div class="marquee-item">
-          MediaFire Lookup
-          <span class="marquee-dot"></span>
-          File Information
-          <span class="marquee-dot"></span>
-          Download Access
-          <span class="marquee-dot"></span>
-          ZXH OFFICIAL
-          <span class="marquee-dot"></span>
+          MediaFire Lookup <span class="marquee-dot"></span>
+          File Information <span class="marquee-dot"></span>
+          Download Access <span class="marquee-dot"></span>
+          ZXH OFFICIAL <span class="marquee-dot"></span>
         </div>
-
         <div class="marquee-item">
-          MediaFire Lookup
-          <span class="marquee-dot"></span>
-          File Information
-          <span class="marquee-dot"></span>
-          Download Access
-          <span class="marquee-dot"></span>
-          ZXH OFFICIAL
-          <span class="marquee-dot"></span>
+          MediaFire Lookup <span class="marquee-dot"></span>
+          File Information <span class="marquee-dot"></span>
+          Download Access <span class="marquee-dot"></span>
+          ZXH OFFICIAL <span class="marquee-dot"></span>
         </div>
-
       </div>
     </div>
 
-
-    <!-- ==================================================
-         ENGINE
-    ================================================== -->
-
-    <section
-      class="engine-section"
-      id="engine"
-    >
-
+    <!-- ENGINE -->
+    <section class="engine-section" id="engine">
       <div class="container">
 
         <div class="engine-header">
-
           <div class="engine-title">
-            <div class="eyebrow">
-              File Lookup
-            </div>
-
-            <h2>
-              Enter your link.
-            </h2>
-
-            <p>
-              Use a public HTTPS MediaFire URL.
-            </p>
+            <div class="eyebrow">File Lookup</div>
+            <h2>Enter your link.</h2>
+            <p>Use a public HTTPS MediaFire URL.</p>
           </div>
-
           <div class="engine-status">
             <span class="status-dot"></span>
             Engine Online
           </div>
-
         </div>
 
-
-        <!-- URL INPUT -->
-
-        <form
-          class="url-field"
-          id="lookupForm"
-          autocomplete="off"
-        >
-
+        <form class="url-field" id="lookupForm" autocomplete="off">
           <div class="url-icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
             </svg>
           </div>
 
-          <input
-            id="urlInput"
-            type="url"
-            inputmode="url"
-            spellcheck="false"
-            autocapitalize="off"
-            autocomplete="url"
-            placeholder="Paste your MediaFire link here..."
-            aria-label="MediaFire URL"
-            required
-          >
-
-          <button
-            class="lookup-btn"
-            id="lookupBtn"
-            type="submit"
-          >
-            <span id="lookupText">
-              Analyze Link
-            </span>
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.9"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+          <div class="url-input-wrap">
+            <input
+              id="urlInput"
+              type="url"
+              inputmode="url"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              placeholder="Paste your MediaFire link here..."
+              aria-label="MediaFire URL"
+              required
             >
+            <button
+              type="button"
+              class="url-clear"
+              id="urlClear"
+              aria-label="Clear input"
+              title="Clear input"
+              hidden
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <button class="lookup-btn" id="lookupBtn" type="submit">
+            <span id="lookupText">Analyze Link</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14"></path>
               <path d="m13 6 6 6-6 6"></path>
             </svg>
           </button>
-
         </form>
 
-
         <div class="engine-note">
-          <span>
-            Supported:
-            https://www.mediafire.com/...
-          </span>
-
-          <span>
-            ZXH OFFICIAL API • Public file pages only
-          </span>
+          <span>Supported: https://www.mediafire.com/...</span>
+          <span>ZXH OFFICIAL API • Public file pages only</span>
         </div>
 
-
-        <!-- LOADING -->
-
-        <div
-          class="loading"
-          id="loading"
-          aria-live="polite"
-        >
+        <div class="loading" id="loading" aria-live="polite">
           <div class="spinner"></div>
-
           <div>
-            <strong>
-              Analyzing MediaFire page
-            </strong>
-
-            <span>
-              Reading file metadata and available download information...
-            </span>
+            <strong>Analyzing MediaFire page</strong>
+            <span>Reading file metadata and available download information...</span>
           </div>
         </div>
 
-
-        <!-- ERROR -->
-
-        <div
-          class="error-box"
-          id="errorBox"
-          aria-live="assertive"
-        >
-          <div class="error-icon">
-            !
-          </div>
-
+        <div class="error-box" id="errorBox" aria-live="assertive">
+          <div class="error-icon">!</div>
           <div>
-            <strong id="errorTitle">
-              Lookup failed
-            </strong>
-
-            <p id="errorMessage">
-              Something went wrong.
-            </p>
+            <strong id="errorTitle">Lookup failed</strong>
+            <p id="errorMessage">Something went wrong.</p>
           </div>
         </div>
 
-
-        <!-- RESULT -->
-
-        <section
-          class="result"
-          id="result"
-          aria-live="polite"
-        >
-
+        <section class="result" id="result" aria-live="polite">
           <div class="result-top">
-
             <div>
-              <div class="result-label">
-                File Found
-              </div>
-
-              <h3
-                class="result-name"
-                id="resultName"
-              >
-                —
-              </h3>
+              <div class="result-label">File Found</div>
+              <h3 class="result-name" id="resultName">—</h3>
             </div>
-
-            <div class="result-badge">
-              READY
-            </div>
-
+            <div class="result-badge">READY</div>
           </div>
-
 
           <div class="result-grid">
-
             <div class="result-stat">
-              <span>
-                File Size
-              </span>
-
-              <strong id="resultSize">
-                —
-              </strong>
+              <span>File Size</span>
+              <strong id="resultSize">—</strong>
             </div>
-
             <div class="result-stat">
-              <span>
-                Upload Date
-              </span>
-
-              <strong id="resultDate">
-                Not available
-              </strong>
+              <span>Upload Date</span>
+              <strong id="resultDate">Not available</strong>
             </div>
-
             <div class="result-stat">
-              <span>
-                Source
-              </span>
-
-              <strong>
-                MediaFire
-              </strong>
+              <span>Source</span>
+              <strong>MediaFire</strong>
             </div>
-
           </div>
 
-
           <div class="result-actions">
-
-            <a
-              class="action-btn primary"
-              id="downloadBtn"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 3v12"></path>
-                <path d="m7 10 5 5 5-5"></path>
-                <path d="M5 21h14"></path>
+            <a class="action-btn primary" id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
               </svg>
-
               Download File
             </a>
-
-            <a
-              class="action-btn"
-              id="sourceBtn"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M14 3h7v7"></path>
-                <path d="M10 14 21 3"></path>
+            <a class="action-btn" id="sourceBtn" href="#" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3h7v7"></path><path d="M10 14 21 3"></path>
                 <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
               </svg>
-
               Open Source
             </a>
-
-            <button
-              class="action-btn"
-              id="copyBtn"
-              type="button"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect
-                  x="9"
-                  y="9"
-                  width="11"
-                  height="11"
-                  rx="2"
-                ></rect>
-
-                <path
-                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                ></path>
+            <button class="action-btn" id="copyBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-
               Copy Link
             </button>
-
-            <button
-              class="action-btn"
-              id="shareBtn"
-              type="button"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+            <button class="action-btn" id="shareBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="18" cy="5" r="3"></circle>
                 <circle cx="6" cy="12" r="3"></circle>
                 <circle cx="18" cy="19" r="3"></circle>
                 <path d="m8.59 13.51 6.83 3.98"></path>
                 <path d="m15.41 6.51-6.82 3.98"></path>
               </svg>
-
               Share
             </button>
-
-          </div>
-
-        </section>
-
-
-        <!-- RECENT -->
-
-        <div class="recent">
-
-          <div class="recent-header">
-            <h3>
-              Recent Lookups
-            </h3>
-
-            <button
-              class="clear-recent"
-              id="clearRecent"
-              type="button"
-            >
-              Clear history
+            <button class="action-btn" id="newLookupBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              New Lookup
             </button>
           </div>
+        </section>
 
-          <div
-            class="recent-list"
-            id="recentList"
-          ></div>
-
+        <div class="recent">
+          <div class="recent-header">
+            <h3>Recent Lookups</h3>
+            <button class="clear-recent" id="clearRecent" type="button">Clear history</button>
+          </div>
+          <div class="recent-list" id="recentList"></div>
         </div>
 
       </div>
-
     </section>
 
-
-    <!-- ==================================================
-         STATEMENT
-    ================================================== -->
-
+    <!-- STATEMENT -->
     <section class="statement">
-
       <div class="container statement-inner">
-
+        <div><div class="statement-number">01 / ENGINE</div></div>
         <div>
-          <div class="statement-number">
-            01 / ENGINE
-          </div>
+          <h2>One link. <span>Clear information.</span> Direct access.</h2>
         </div>
-
-        <div>
-          <h2>
-            One link.
-            <span>
-              Clear information.
-            </span>
-            Direct access.
-          </h2>
-        </div>
-
       </div>
-
     </section>
 
-
-    <!-- ==================================================
-         FEATURES
-    ================================================== -->
-
+    <!-- FEATURES -->
     <section class="section">
-
       <div class="container">
-
         <div class="section-heading">
-
-          <div class="eyebrow">
-            Built for simplicity
-          </div>
-
-          <h2>
-            Less friction.
-            More file clarity.
-          </h2>
-
+          <div class="eyebrow">Built for simplicity</div>
+          <h2>Less friction. More file clarity.</h2>
           <p>
-            A focused MediaFire utility designed around
-            the actual task: provide a public file URL,
-            inspect its information and access the
-            available download destination.
+            A focused MediaFire utility designed around the actual task:
+            provide a public file URL, inspect its information and access
+            the available download destination.
           </p>
-
         </div>
-
 
         <div class="features-grid">
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2v20"></path>
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
               </svg>
             </div>
-
-            <h3>
-              File Metadata
-            </h3>
-
-            <p>
-              Retrieve available filename, file size
-              and upload information from the public
-              MediaFire page.
-            </p>
-
+            <h3>File Metadata</h3>
+            <p>Retrieve available filename, file size and upload information from the public MediaFire page.</p>
           </article>
 
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 3v12"></path>
-                <path d="m7 10 5 5 5-5"></path>
-                <path d="M5 21h14"></path>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
               </svg>
             </div>
-
-            <h3>
-              Download Access
-            </h3>
-
-            <p>
-              When a valid public download destination
-              is found, the result provides direct access
-              to the available download URL.
-            </p>
-
+            <h3>Download Access</h3>
+            <p>When a valid public download destination is found, the result provides direct access to the available download URL.</p>
           </article>
 
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect
-                  x="3"
-                  y="3"
-                  width="18"
-                  height="18"
-                  rx="4"
-                ></rect>
-
-                <path d="M8 12h8"></path>
-                <path d="M12 8v8"></path>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                <path d="M8 12h8"></path><path d="M12 8v8"></path>
               </svg>
             </div>
-
-            <h3>
-              PWA Experience
-            </h3>
-
-            <p>
-              Install ZXH OFFICIAL MediaFire Engine
-              on supported devices for a faster,
-              app-like experience.
-            </p>
-
+            <h3>PWA Experience</h3>
+            <p>Install ZXH OFFICIAL MediaFire Engine on supported devices for a faster, app-like experience.</p>
           </article>
 
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="9"></circle>
                 <path d="M3 12h18"></path>
                 <path d="M12 3a14 14 0 0 1 0 18"></path>
                 <path d="M12 3a14 14 0 0 0 0 18"></path>
               </svg>
             </div>
-
-            <h3>
-              Responsive
-            </h3>
-
-            <p>
-              Designed to remain usable across phones,
-              tablets and large desktop screens without
-              shrinking the experience into a tiny box.
-            </p>
-
+            <h3>Responsive</h3>
+            <p>Designed to remain usable across phones, tablets and large desktop screens without shrinking the experience into a tiny box.</p>
           </article>
 
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
             </div>
-
-            <h3>
-              Controlled API
-            </h3>
-
-            <p>
-              The frontend uses the same-origin
-              <strong>/api/scrape</strong> route instead
-              of exposing a third-party API directly.
-            </p>
-
+            <h3>Controlled API</h3>
+            <p>The frontend uses the same-origin <strong>/api/scrape</strong> route instead of exposing a third-party API directly.</p>
           </article>
 
-
           <article class="feature">
-
             <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 6 9 17l-5-5"></path>
               </svg>
             </div>
-
-            <h3>
-              Simple Workflow
-            </h3>
-
-            <p>
-              Paste. Analyze. Review. Download or open
-              the source. No unnecessary registration
-              flow or complicated dashboard.
-            </p>
-
+            <h3>Simple Workflow</h3>
+            <p>Paste. Analyze. Review. Download or open the source. No unnecessary registration flow or complicated dashboard.</p>
           </article>
-
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- ==================================================
-         FAQ
-    ================================================== -->
-
-    <section class="section">
-
+    <!-- FAQ -->
+    <section class="section" id="faq">
       <div class="container">
-
         <div class="section-heading">
-
-          <div class="eyebrow">
-            Frequently asked
-          </div>
-
-          <h2>
-            Questions,
-            answered.
-          </h2>
-
+          <div class="eyebrow">Frequently asked</div>
+          <h2>Questions, answered.</h2>
         </div>
-
 
         <div class="faq-list">
-
           <article class="faq">
-
-            <button
-              class="faq-question"
-              type="button"
-            >
-              <span>
-                What links are supported?
-              </span>
-
-              <span class="faq-plus">
-                +
-              </span>
+            <button class="faq-question" type="button">
+              <span>What links are supported?</span>
+              <span class="faq-plus">+</span>
             </button>
-
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>
-                  Public HTTPS MediaFire URLs are supported.
-                  The backend validates that the submitted
-                  hostname belongs to MediaFire before
-                  processing the page.
-                </p>
+                <p>Public HTTPS MediaFire URLs are supported. The backend validates that the submitted hostname belongs to MediaFire before processing the page.</p>
               </div>
             </div>
-
           </article>
-
 
           <article class="faq">
-
-            <button
-              class="faq-question"
-              type="button"
-            >
-              <span>
-                Do I need an account?
-              </span>
-
-              <span class="faq-plus">
-                +
-              </span>
+            <button class="faq-question" type="button">
+              <span>Do I need an account?</span>
+              <span class="faq-plus">+</span>
             </button>
-
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>
-                  No account is required for the frontend
-                  lookup workflow.
-                </p>
+                <p>No account is required for the frontend lookup workflow.</p>
               </div>
             </div>
-
           </article>
-
 
           <article class="faq">
-
-            <button
-              class="faq-question"
-              type="button"
-            >
-              <span>
-                Why can a download link sometimes be unavailable?
-              </span>
-
-              <span class="faq-plus">
-                +
-              </span>
+            <button class="faq-question" type="button">
+              <span>Why can a download link sometimes be unavailable?</span>
+              <span class="faq-plus">+</span>
             </button>
-
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>
-                  The result depends on what the public
-                  MediaFire page exposes at the time of
-                  processing. If no download destination
-                  can be extracted, the file information can
-                  still be returned without a download URL.
-                </p>
+                <p>The result depends on what the public MediaFire page exposes at the time of processing. If no download destination can be extracted, the file information can still be returned without a download URL.</p>
               </div>
             </div>
-
           </article>
-
 
           <article class="faq">
-
-            <button
-              class="faq-question"
-              type="button"
-            >
-              <span>
-                Does the site call an external API from the browser?
-              </span>
-
-              <span class="faq-plus">
-                +
-              </span>
+            <button class="faq-question" type="button">
+              <span>Does the site call an external API from the browser?</span>
+              <span class="faq-plus">+</span>
             </button>
-
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>
-                  No. The frontend calls the same-origin
-                  <strong>/api/scrape</strong> endpoint.
-                  The server-side route performs the MediaFire
-                  page request.
-                </p>
+                <p>No. The frontend calls the same-origin <strong>/api/scrape</strong> endpoint. The server-side route performs the MediaFire page request.</p>
               </div>
             </div>
-
           </article>
-
 
           <article class="faq">
-
-            <button
-              class="faq-question"
-              type="button"
-            >
-              <span>
-                Can I install it as an app?
-              </span>
-
-              <span class="faq-plus">
-                +
-              </span>
+            <button class="faq-question" type="button">
+              <span>Can I install it as an app?</span>
+              <span class="faq-plus">+</span>
             </button>
-
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>
-                  If the browser supports PWA installation
-                  and the required manifest/service worker
-                  files are deployed, the installation prompt
-                  can appear automatically.
-                </p>
+                <p>If the browser supports PWA installation and the required manifest/service worker files are deployed, the installation prompt can appear automatically.</p>
               </div>
             </div>
-
           </article>
-
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- ==================================================
-         CTA
-    ================================================== -->
-
+    <!-- CTA -->
     <section class="cta">
-
       <div class="container">
-
         <div class="cta-box">
-
-          <div class="eyebrow">
-            ZXH OFFICIAL
-          </div>
-
-          <h2>
-            Your file.
-            Your link.
-            Your workflow.
-          </h2>
-
-          <p>
-            Return to the MediaFire engine whenever you
-            need to inspect another public file link.
-          </p>
-
-          <a
-            class="cta-button"
-            href="#engine"
-          >
+          <div class="eyebrow">ZXH OFFICIAL</div>
+          <h2>Your file. Your link. Your workflow.</h2>
+          <p>Return to the MediaFire engine whenever you need to inspect another public file link.</p>
+          <a class="cta-button" href="#engine">
             Start a new lookup
-
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 5v14"></path>
-              <path d="m19 12-7 7-7-7"></path>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>
             </svg>
           </a>
-
         </div>
-
       </div>
-
     </section>
 
   </main>
 
-
-  <!-- ==================================================
-       FOOTER
-  ================================================== -->
-
+  <!-- FOOTER -->
   <footer>
-
     <div class="container footer-main">
-
       <div class="footer-brand">
-
-        <h3>
-          ZXH OFFICIAL
-        </h3>
-
-        <p>
-          MediaFire Downloader & File Lookup Engine.
-          Designed and developed as part of the ZXH
-          OFFICIAL web tools ecosystem.
-        </p>
-
+        <h3>ZXH OFFICIAL</h3>
+        <p>MediaFire Downloader &amp; File Lookup Engine. Designed and developed as part of the ZXH OFFICIAL web tools ecosystem.</p>
       </div>
-
       <div class="footer-links">
-
-        <a href="#engine">
-          Lookup
-        </a>
-
-        <a href="#engine">
-          Downloader
-        </a>
-
-        <a href="#faq">
-          FAQ
-        </a>
-
+        <a href="#engine">Lookup</a>
+        <a href="#engine">Downloader</a>
+        <a href="#faq">FAQ</a>
       </div>
-
     </div>
-
-
     <div class="container footer-bottom">
-
-      <span>
-        © <span id="year"></span> ZXH OFFICIAL
-      </span>
-
-      <span>
-        POWERED BY ZULQARNAIN X HAIDER
-      </span>
-
+      <span>© <span id="year"></span> ZXH OFFICIAL</span>
+      <span>POWERED BY ZULQARNAIN X HAIDER</span>
     </div>
-
   </footer>
 
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
 
-  <!-- ==================================================
-       TOAST
-  ================================================== -->
-
-  <div
-    class="toast"
-    id="toast"
-    role="status"
-    aria-live="polite"
-  >
-    Copied
-  </div>
-
-
-  <!-- ==================================================
-       PWA INSTALL POPUP
-  ================================================== -->
-
-  <div
-    class="install-popup"
-    id="installPopup"
-  >
-
-    <div class="install-row">
-
-      <div class="install-logo">
-        ZXH
-      </div>
-
-      <div class="install-copy">
-
-        <strong>
-          Install ZXH OFFICIAL
-        </strong>
-
-        <span>
-          Add MediaFire Engine to your home screen.
-        </span>
-
-      </div>
-
-    </div>
-
-    <div class="install-actions">
-
-      <button
-        type="button"
-        id="installLater"
-      >
-        Later
+  <!-- PWA INSTALL POPUP -->
+  <div id="installPromptOverlay" class="popup-overlay">
+    <div class="popup-content" onclick="event.stopPropagation()">
+      <button class="popup-close-btn" type="button" onclick="dismissInstallPrompt()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
       </button>
 
-      <button
-        type="button"
-        class="install-now"
-        id="installNow"
-      >
+      <div class="install-prompt-icon">
+        <img src="https://i.ibb.co/ZzFGqdX3/file-00000000ab8c820797c9c66f5afa0b17.png" alt="ZXH MDFIRE Downloader">
+      </div>
+
+      <h2>𝐈𝐧𝐬𝐭𝐚𝐥𝐥 𝐙𝐗𝐇 𝐌𝐃𝐅𝐈𝐑𝐄 𝐅𝐈𝐋𝐄𝐒 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐑</h2>
+      <p>Add this app to your home screen for quick access and offline use.</p>
+
+      <button id="installBtn" type="button" class="install-prompt-btn" onclick="triggerInstall()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
+        </svg>
         Install App
       </button>
 
+      <button type="button" onclick="dismissInstallPrompt()" class="install-prompt-not-now">Not Now</button>
     </div>
-
   </div>
 
-
-  <!-- ==================================================
-       UPDATE BANNER
-  ================================================== -->
-
-  <div
-    class="update-banner"
-    id="updateBanner"
-  >
-
-    <span>
-      A new version of ZXH OFFICIAL is available.
-    </span>
-
-    <button
-      type="button"
-      id="updateBtn"
-    >
-      Update
-    </button>
-
+  <div class="update-banner" id="updateBanner">
+    <span>A new version of ZXH OFFICIAL is available.</span>
+    <button type="button" id="updateBtn">Update</button>
   </div>
-
-
-  <!-- ==================================================
-       JAVASCRIPT
-  ================================================== -->
 
   <script>
     "use strict";
 
+    /* ==================================================
+       🔐 SECURE CLIENT TOKEN (must match api/scrape.js)
+    ================================================== */
+    const ZXH_CLIENT_TOKEN = "zxh-mdfire-web-2024-secure-v1";
 
     /* ==================================================
-       ELEMENTS
+       PRELOADER
     ================================================== */
+    (function() {
+      const pre = document.getElementById("preloader");
+      const startTime = Date.now();
+      const MIN_DURATION = 900;
 
-    const lookupForm =
-      document.getElementById("lookupForm");
+      function hidePreloader() {
+        const elapsed = Date.now() - startTime;
+        const wait = Math.max(0, MIN_DURATION - elapsed);
+        setTimeout(() => {
+          pre.classList.add("hide");
+          setTimeout(() => { pre.style.display = "none"; }, 650);
+        }, wait);
+      }
 
-    const urlInput =
-      document.getElementById("urlInput");
+      if (document.readyState === "complete") {
+        hidePreloader();
+      } else {
+        window.addEventListener("load", hidePreloader, { once: true });
+        setTimeout(hidePreloader, 3500);
+      }
+    })();
 
-    const lookupBtn =
-      document.getElementById("lookupBtn");
+    /* ELEMENTS */
+    const lookupForm   = document.getElementById("lookupForm");
+    const urlInput     = document.getElementById("urlInput");
+    const urlClear     = document.getElementById("urlClear");
+    const lookupBtn    = document.getElementById("lookupBtn");
+    const lookupText   = document.getElementById("lookupText");
+    const loading      = document.getElementById("loading");
+    const errorBox     = document.getElementById("errorBox");
+    const errorTitle   = document.getElementById("errorTitle");
+    const errorMessage = document.getElementById("errorMessage");
+    const result       = document.getElementById("result");
+    const resultName   = document.getElementById("resultName");
+    const resultSize   = document.getElementById("resultSize");
+    const resultDate   = document.getElementById("resultDate");
+    const downloadBtn  = document.getElementById("downloadBtn");
+    const sourceBtn    = document.getElementById("sourceBtn");
+    const copyBtn      = document.getElementById("copyBtn");
+    const shareBtn     = document.getElementById("shareBtn");
+    const newLookupBtn = document.getElementById("newLookupBtn");
+    const recentList   = document.getElementById("recentList");
+    const clearRecent  = document.getElementById("clearRecent");
+    const themeBtn     = document.getElementById("themeBtn");
+    const themeIcon    = document.getElementById("themeIcon");
+    const toast        = document.getElementById("toast");
+    const installPromptOverlay = document.getElementById("installPromptOverlay");
+    const updateBanner = document.getElementById("updateBanner");
+    const updateBtn    = document.getElementById("updateBtn");
 
-    const lookupText =
-      document.getElementById("lookupText");
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    const loading =
-      document.getElementById("loading");
+    /* STATE */
+    const RECENT_KEY = "mfdl_recent";
+    let currentOriginalUrl = "";
+    let deferredInstallPrompt = null;
+    let activeServiceWorker = null;
 
-    const errorBox =
-      document.getElementById("errorBox");
-
-    const errorTitle =
-      document.getElementById("errorTitle");
-
-    const errorMessage =
-      document.getElementById("errorMessage");
-
-    const result =
-      document.getElementById("result");
-
-    const resultName =
-      document.getElementById("resultName");
-
-    const resultSize =
-      document.getElementById("resultSize");
-
-    const resultDate =
-      document.getElementById("resultDate");
-
-    const downloadBtn =
-      document.getElementById("downloadBtn");
-
-    const sourceBtn =
-      document.getElementById("sourceBtn");
-
-    const copyBtn =
-      document.getElementById("copyBtn");
-
-    const shareBtn =
-      document.getElementById("shareBtn");
-
-    const recentList =
-      document.getElementById("recentList");
-
-    const clearRecent =
-      document.getElementById("clearRecent");
-
-    const themeBtn =
-      document.getElementById("themeBtn");
-
-    const themeIcon =
-      document.getElementById("themeIcon");
-
-    const toast =
-      document.getElementById("toast");
-
-    const installPopup =
-      document.getElementById("installPopup");
-
-    const installLater =
-      document.getElementById("installLater");
-
-    const installNow =
-      document.getElementById("installNow");
-
-    const updateBanner =
-      document.getElementById("updateBanner");
-
-    const updateBtn =
-      document.getElementById("updateBtn");
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
-
-    /* ==================================================
-       STATE
-    ================================================== */
-
-    const RECENT_KEY =
-      "mfdl_recent";
-
-    let currentOriginalUrl =
-      "";
-
-    let deferredInstallPrompt =
-      null;
-
-    let activeServiceWorker =
-      null;
-
-
-    /* ==================================================
-       TOAST
-    ================================================== */
-
+    /* TOAST */
     let toastTimer = null;
-
     function showToast(message) {
       toast.textContent = message;
-
       toast.classList.add("show");
-
       clearTimeout(toastTimer);
-
-      toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2300);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
     }
 
-
-    /* ==================================================
-       THEME
-    ================================================== */
-
+    /* THEME */
     function applyTheme(theme) {
-      const isDark =
-        theme === "dark";
-
-      document.documentElement.classList.toggle(
-        "dark",
-        isDark
-      );
-
-      localStorage.setItem(
-        "zxh_mdfire_theme",
-        isDark ? "dark" : "light"
-      );
-
+      const isDark = theme === "dark";
+      document.documentElement.classList.toggle("dark", isDark);
+      localStorage.setItem("zxh_mdfire_theme", isDark ? "dark" : "light");
       themeIcon.innerHTML = isDark
-        ? `
-          <path d="M21 12.79A9 9 0 1 1 11.21 3
-          7 7 0 0 0 21 12.79Z"></path>
-        `
-        : `
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2"></path>
-          <path d="M12 20v2"></path>
-          <path d="m4.93 4.93 1.42 1.42"></path>
-          <path d="m17.65 17.65 1.42 1.42"></path>
-          <path d="M2 12h2"></path>
-          <path d="M20 12h2"></path>
-          <path d="m6.35 17.65-1.42 1.42"></path>
-          <path d="m19.07 4.93-1.42 1.42"></path>
-        `;
+        ? `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>`
+        : `<circle cx="12" cy="12" r="4"></circle>
+           <path d="M12 2v2"></path><path d="M12 20v2"></path>
+           <path d="m4.93 4.93 1.42 1.42"></path><path d="m17.65 17.65 1.42 1.42"></path>
+           <path d="M2 12h2"></path><path d="M20 12h2"></path>
+           <path d="m6.35 17.65-1.42 1.42"></path><path d="m19.07 4.93-1.42 1.42"></path>`;
     }
-
-    const savedTheme =
-      localStorage.getItem(
-        "zxh_mdfire_theme"
-      );
-
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    } else {
-      const prefersDark =
-        window.matchMedia &&
-        window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-
-      applyTheme(
-        prefersDark ? "dark" : "light"
-      );
+    const savedTheme = localStorage.getItem("zxh_mdfire_theme");
+    if (savedTheme) applyTheme(savedTheme);
+    else {
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyTheme(prefersDark ? "dark" : "light");
     }
+    themeBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      applyTheme(isDark ? "light" : "dark");
+    });
 
-    themeBtn.addEventListener(
-      "click",
-      () => {
-        const isDark =
-          document.documentElement.classList.contains(
-            "dark"
-          );
-
-        applyTheme(
-          isDark ? "light" : "dark"
-        );
-      }
-    );
-
-
-    /* ==================================================
-       MEDIAFIRE URL VALIDATION
-    ================================================== */
-
+    /* URL VALIDATION */
     function validateMediaFireUrl(value) {
       let parsed;
-
-      try {
-        parsed =
-          new URL(
-            String(value).trim()
-          );
-      } catch {
-        return {
-          valid: false,
-          message: "Please enter a valid URL."
-        };
-      }
-
-      if (
-        parsed.protocol !== "https:"
-      ) {
-        return {
-          valid: false,
-          message:
-            "Only HTTPS MediaFire links are supported."
-        };
-      }
-
-      const host =
-        parsed.hostname.toLowerCase();
-
-      const isMediaFire =
-        host === "mediafire.com" ||
-        host.endsWith(".mediafire.com");
-
-      if (!isMediaFire) {
-        return {
-          valid: false,
-          message:
-            "Please enter a valid MediaFire URL."
-        };
-      }
-
-      return {
-        valid: true,
-        url: parsed.toString()
-      };
+      try { parsed = new URL(String(value).trim()); }
+      catch { return { valid: false, message: "Please enter a valid URL." }; }
+      if (parsed.protocol !== "https:") return { valid: false, message: "Only HTTPS MediaFire links are supported." };
+      const host = parsed.hostname.toLowerCase();
+      const isMediaFire = host === "mediafire.com" || host.endsWith(".mediafire.com");
+      if (!isMediaFire) return { valid: false, message: "Please enter a valid MediaFire URL." };
+      return { valid: true, url: parsed.toString() };
     }
 
-
-    /* ==================================================
-       UI STATES
-    ================================================== */
-
+    /* UI STATES */
     function hideAllStates() {
       loading.classList.remove("show");
       errorBox.classList.remove("show");
       result.classList.remove("show");
     }
-
     function showLoading() {
       hideAllStates();
-
       loading.classList.add("show");
-
       lookupBtn.disabled = true;
-
-      lookupText.textContent =
-        "Analyzing...";
+      lookupText.textContent = "Analyzing...";
     }
-
     function hideLoading() {
       loading.classList.remove("show");
-
       lookupBtn.disabled = false;
-
-      lookupText.textContent =
-        "Analyze Link";
+      lookupText.textContent = "Analyze Link";
     }
-
-    function showError(
-      message,
-      title = "Lookup failed"
-    ) {
+    function showError(message, title = "Lookup failed") {
       hideAllStates();
-
-      errorTitle.textContent =
-        title;
-
-      errorMessage.textContent =
-        message;
-
+      errorTitle.textContent = title;
+      errorMessage.textContent = message;
       errorBox.classList.add("show");
     }
 
-
     /* ==================================================
-       API REQUEST
-       IMPORTANT:
-       NO X-ZXH-CLIENT HEADER
+       🔐 SECURE API FETCH
     ================================================== */
-
     async function scrapeMediaFire(value) {
+      const validation = validateMediaFireUrl(value);
+      if (!validation.valid) throw new Error(validation.message);
 
-      const validation =
-        validateMediaFireUrl(value);
+      const endpoint = "/api/scrape?url=" + encodeURIComponent(validation.url);
 
-      if (!validation.valid) {
-        throw new Error(
-          validation.message
-        );
-      }
-
-      const endpoint =
-        "/api/scrape?url=" +
-        encodeURIComponent(
-          validation.url
-        );
-
-      const response =
-        await fetch(
-          endpoint,
-          {
-            method: "GET",
-
-            headers: {
-              "Accept":
-                "application/json"
-            },
-
-            cache: "no-store"
-          }
-        );
+      const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "X-ZXH-Client": ZXH_CLIENT_TOKEN
+        },
+        credentials: "same-origin",
+        cache: "no-store"
+      });
 
       let data = null;
+      try { data = await response.json(); }
+      catch { throw new Error("The API returned an invalid response."); }
 
-      try {
-        data =
-          await response.json();
-      } catch {
-        throw new Error(
-          "The API returned an invalid response."
-        );
+      if (!response.ok || !data || data.success !== true) {
+        throw new Error(data?.error || `Request failed with HTTP ${response.status}.`);
       }
-
-      if (
-        !response.ok ||
-        !data ||
-        data.success !== true
-      ) {
-        throw new Error(
-          data?.error ||
-          `Request failed with HTTP ${response.status}.`
-        );
-      }
-
       return data;
     }
 
-
-    /* ==================================================
-       SHOW RESULT
-    ================================================== */
-
+    /* SHOW RESULT */
     function showResult(data) {
+      resultName.textContent = data.filename || "Unknown file";
+      resultSize.textContent = data.filesize || "Size unknown";
+      resultDate.textContent = data.upload_date || "Not available";
+      currentOriginalUrl = data.original_url || urlInput.value.trim();
+      sourceBtn.href = data.original_url || currentOriginalUrl;
 
-      resultName.textContent =
-        data.filename ||
-        "Unknown file";
-
-      resultSize.textContent =
-        data.filesize ||
-        "Size unknown";
-
-      resultDate.textContent =
-        data.upload_date ||
-        "Not available";
-
-      currentOriginalUrl =
-        data.original_url ||
-        urlInput.value.trim();
-
-      sourceBtn.href =
-        data.original_url ||
-        currentOriginalUrl;
-
-      if (
-        data.proxied_download_url
-      ) {
-        downloadBtn.href =
-          data.proxied_download_url;
-
-        downloadBtn.style.display =
-          "inline-flex";
-
-        downloadBtn.removeAttribute(
-          "aria-disabled"
-        );
+      if (data.proxied_download_url) {
+        downloadBtn.href = data.proxied_download_url;
+        downloadBtn.style.display = "inline-flex";
+        downloadBtn.removeAttribute("aria-disabled");
       } else {
-        downloadBtn.removeAttribute(
-          "href"
-        );
-
-        downloadBtn.style.display =
-          "none";
+        downloadBtn.removeAttribute("href");
+        downloadBtn.style.display = "none";
       }
-
       result.classList.add("show");
     }
 
-
-    /* ==================================================
-       RECENT LOOKUPS
-    ================================================== */
-
+    /* RECENT */
     function getRecent() {
       try {
-        const raw =
-          localStorage.getItem(
-            RECENT_KEY
-          );
-
-        if (!raw) {
-          return [];
-        }
-
-        const parsed =
-          JSON.parse(raw);
-
-        return Array.isArray(parsed)
-          ? parsed
-          : [];
-
-      } catch {
-        return [];
-      }
+        const raw = localStorage.getItem(RECENT_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch { return []; }
     }
-
     function saveRecent(data) {
-
       const item = {
-        filename:
-          data.filename ||
-          "Unknown file",
-
-        url:
-          data.original_url ||
-          "",
-
-        filesize:
-          data.filesize ||
-          ""
+        filename: data.filename || "Unknown file",
+        url: data.original_url || "",
+        filesize: data.filesize || ""
       };
-
-      if (!item.url) {
-        return;
-      }
-
-      let recent =
-        getRecent();
-
-      recent =
-        recent.filter(
-          entry =>
-            entry.url !== item.url
-        );
-
+      if (!item.url) return;
+      let recent = getRecent();
+      recent = recent.filter(entry => entry.url !== item.url);
       recent.unshift(item);
-
-      recent =
-        recent.slice(0, 6);
-
-      localStorage.setItem(
-        RECENT_KEY,
-        JSON.stringify(recent)
-      );
-
+      recent = recent.slice(0, 6);
+      localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
       renderRecent();
     }
-
     function renderRecent() {
-
-      const recent =
-        getRecent();
-
-      recentList.innerHTML =
-        "";
-
+      const recent = getRecent();
+      recentList.innerHTML = "";
       if (!recent.length) {
-
-        recentList.innerHTML = `
-          <div class="recent-empty">
-            Your recent MediaFire lookups will appear here.
-          </div>
-        `;
-
+        recentList.innerHTML = `<div class="recent-empty">Your recent MediaFire lookups will appear here.</div>`;
         return;
       }
-
-      recent.forEach(
-        (item) => {
-
-          const button =
-            document.createElement(
-              "button"
-            );
-
-          button.type =
-            "button";
-
-          button.className =
-            "recent-item";
-
-          button.innerHTML = `
-            <strong></strong>
-            <span></span>
-          `;
-
-          button
-            .querySelector("strong")
-            .textContent =
-            item.filename ||
-            "Unknown file";
-
-          button
-            .querySelector("span")
-            .textContent =
-            item.filesize ||
-            item.url;
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              urlInput.value =
-                item.url;
-
-              lookupForm.dispatchEvent(
-                new Event(
-                  "submit",
-                  {
-                    bubbles: true,
-                    cancelable: true
-                  }
-                )
-              );
-
-            }
-          );
-
-          recentList.appendChild(
-            button
-          );
-        }
-      );
+      recent.forEach((item) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "recent-item";
+        button.innerHTML = `<strong></strong><span></span>`;
+        button.querySelector("strong").textContent = item.filename || "Unknown file";
+        button.querySelector("span").textContent = item.filesize ? (item.filesize + " • " + item.url) : item.url;
+        button.title = item.url;
+        button.addEventListener("click", () => {
+          urlInput.value = item.url;
+          updateClearButton();
+          lookupForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+        });
+        recentList.appendChild(button);
+      });
     }
-
-    clearRecent.addEventListener(
-      "click",
-      () => {
-
-        localStorage.removeItem(
-          RECENT_KEY
-        );
-
-        renderRecent();
-
-        showToast(
-          "Recent history cleared"
-        );
-      }
-    );
-
+    clearRecent.addEventListener("click", () => {
+      localStorage.removeItem(RECENT_KEY);
+      renderRecent();
+      showToast("Recent history cleared");
+    });
     renderRecent();
 
-
-    /* ==================================================
-       MAIN LOOKUP
-    ================================================== */
-
-    lookupForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-        const value =
-          urlInput.value.trim();
-
-        if (!value) {
-          showError(
-            "Paste a MediaFire link first.",
-            "URL required"
-          );
-
-          urlInput.focus();
-
-          return;
-        }
-
-        showLoading();
-
-        try {
-
-          const data =
-            await scrapeMediaFire(
-              value
-            );
-
-          hideLoading();
-
-          showResult(
-            data
-          );
-
-          saveRecent(
-            data
-          );
-
-          history.replaceState(
-            null,
-            "",
-            "/?mf=" +
-            encodeURIComponent(
-              data.original_url ||
-              value
-            )
-          );
-
-          result.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest"
-          });
-
-        } catch (error) {
-
-          hideLoading();
-
-          showError(
-            error?.message ||
-            "Could not process the MediaFire link."
-          );
-
-        }
-      }
-    );
-
-
-    /* ==================================================
-       COPY SOURCE LINK
-    ================================================== */
-
-    copyBtn.addEventListener(
-      "click",
-      async () => {
-
-        if (!currentOriginalUrl) {
-          showToast(
-            "No file link available"
-          );
-
-          return;
-        }
-
-        try {
-
-          await navigator.clipboard.writeText(
-            currentOriginalUrl
-          );
-
-          showToast(
-            "MediaFire link copied"
-          );
-
-        } catch {
-
-          const temp =
-            document.createElement(
-              "textarea"
-            );
-
-          temp.value =
-            currentOriginalUrl;
-
-          document.body.appendChild(
-            temp
-          );
-
-          temp.select();
-
-          try {
-            document.execCommand(
-              "copy"
-            );
-
-            showToast(
-              "MediaFire link copied"
-            );
-          } catch {
-            showToast(
-              "Copy failed"
-            );
-          }
-
-          temp.remove();
-        }
-      }
-    );
-
-
-    /* ==================================================
-       SHARE
-    ================================================== */
-
-    shareBtn.addEventListener(
-      "click",
-      async () => {
-
-        if (!currentOriginalUrl) {
-          showToast(
-            "Analyze a file first"
-          );
-
-          return;
-        }
-
-        const shareUrl =
-          window.location.origin +
-          "/?mf=" +
-          encodeURIComponent(
-            currentOriginalUrl
-          );
-
-        const shareData = {
-          title:
-            "ZXH OFFICIAL MediaFire Downloader",
-
-          text:
-            "MediaFire file lookup via ZXH OFFICIAL.",
-
-          url:
-            shareUrl
-        };
-
-        try {
-
-          if (
-            navigator.share
-          ) {
-
-            await navigator.share(
-              shareData
-            );
-
-            return;
-          }
-
-          await navigator.clipboard.writeText(
-            shareUrl
-          );
-
-          showToast(
-            "Share link copied"
-          );
-
-        } catch (error) {
-
-          if (
-            error?.name ===
-            "AbortError"
-          ) {
-            return;
-          }
-
-          try {
-
-            await navigator.clipboard.writeText(
-              shareUrl
-            );
-
-            showToast(
-              "Share link copied"
-            );
-
-          } catch {
-
-            showToast(
-              "Sharing unavailable"
-            );
-          }
-        }
-      }
-    );
-
-
-    /* ==================================================
-       FAQ
-    ================================================== */
-
-    document
-      .querySelectorAll(".faq-question")
-      .forEach(
-        (question) => {
-
-          question.addEventListener(
-            "click",
-            () => {
-
-              const faq =
-                question.closest(
-                  ".faq"
-                );
-
-              const isOpen =
-                faq.classList.contains(
-                  "open"
-                );
-
-              document
-                .querySelectorAll(
-                  ".faq.open"
-                )
-                .forEach(
-                  (item) =>
-                    item.classList.remove(
-                      "open"
-                    )
-                );
-
-              if (!isOpen) {
-                faq.classList.add(
-                  "open"
-                );
-              }
-            }
-          );
-        }
-      );
-
-
-    /* ==================================================
-       URL ?mf= AUTO LOOKUP
-    ================================================== */
-
-    function loadSharedLookup() {
-
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      const sharedUrl =
-        params.get("mf");
-
-      if (!sharedUrl) {
-        return;
-      }
-
-      const validation =
-        validateMediaFireUrl(
-          sharedUrl
-        );
-
-      if (!validation.valid) {
-        return;
-      }
-
-      urlInput.value =
-        validation.url;
-
-      setTimeout(
-        () => {
-
-          lookupForm.dispatchEvent(
-            new Event(
-              "submit",
-              {
-                bubbles: true,
-                cancelable: true
-              }
-            )
-          );
-
-        },
-        350
-      );
+    /* CLEAR BUTTON */
+    function updateClearButton() {
+      urlClear.hidden = urlInput.value.trim().length === 0;
     }
+    urlInput.addEventListener("input", updateClearButton);
+    urlClear.addEventListener("click", () => {
+      urlInput.value = "";
+      updateClearButton();
+      hideAllStates();
+      currentOriginalUrl = "";
+      urlInput.focus();
+    });
+    updateClearButton();
 
+    /* NEW LOOKUP */
+    newLookupBtn.addEventListener("click", () => {
+      urlInput.value = "";
+      currentOriginalUrl = "";
+      updateClearButton();
+      hideAllStates();
+      try { history.replaceState(null, "", window.location.pathname); } catch {}
+      urlInput.focus();
+      document.getElementById("engine").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    /* MAIN LOOKUP */
+    lookupForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const value = urlInput.value.trim();
+      if (!value) {
+        showError("Paste a MediaFire link first.", "URL required");
+        urlInput.focus();
+        return;
+      }
+      showLoading();
+      try {
+        const data = await scrapeMediaFire(value);
+        hideLoading();
+        showResult(data);
+        saveRecent(data);
+        try { history.replaceState(null, "", window.location.pathname); } catch {}
+        result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch (error) {
+        hideLoading();
+        showError(error?.message || "Could not process the MediaFire link.");
+      }
+    });
+
+    /* COPY */
+    copyBtn.addEventListener("click", async () => {
+      if (!currentOriginalUrl) { showToast("No file link available"); return; }
+      try {
+        await navigator.clipboard.writeText(currentOriginalUrl);
+        showToast("MediaFire link copied");
+      } catch {
+        const temp = document.createElement("textarea");
+        temp.value = currentOriginalUrl;
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand("copy"); showToast("MediaFire link copied"); }
+        catch { showToast("Copy failed"); }
+        temp.remove();
+      }
+    });
+
+    /* SHARE */
+    shareBtn.addEventListener("click", async () => {
+      if (!currentOriginalUrl) { showToast("Analyze a file first"); return; }
+      const shareUrl = window.location.origin + "/?mf=" + encodeURIComponent(currentOriginalUrl);
+      const shareData = {
+        title: "ZXH OFFICIAL MediaFire Downloader",
+        text: "MediaFire file lookup via ZXH OFFICIAL.",
+        url: shareUrl
+      };
+      try {
+        if (navigator.share) { await navigator.share(shareData); return; }
+        await navigator.clipboard.writeText(shareUrl);
+        showToast("Share link copied");
+      } catch (error) {
+        if (error?.name === "AbortError") return;
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          showToast("Share link copied");
+        } catch { showToast("Sharing unavailable"); }
+      }
+    });
+
+    /* FAQ */
+    document.querySelectorAll(".faq-question").forEach((question) => {
+      question.addEventListener("click", () => {
+        const faq = question.closest(".faq");
+        const isOpen = faq.classList.contains("open");
+        document.querySelectorAll(".faq.open").forEach(item => item.classList.remove("open"));
+        if (!isOpen) faq.classList.add("open");
+      });
+    });
+
+    /* SHARED ?mf= LOOKUP */
+    function loadSharedLookup() {
+      const params = new URLSearchParams(window.location.search);
+      const sharedUrl = params.get("mf");
+      if (!sharedUrl) return;
+
+      const validation = validateMediaFireUrl(sharedUrl);
+      try { history.replaceState(null, "", window.location.pathname); } catch {}
+      if (!validation.valid) return;
+
+      urlInput.value = validation.url;
+      updateClearButton();
+
+      setTimeout(() => {
+        lookupForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+      }, 350);
+    }
     loadSharedLookup();
 
-
-    /* ==================================================
-       PWA INSTALL PROMPT
-    ================================================== */
-
-    window.addEventListener(
-      "beforeinstallprompt",
-      (event) => {
-
-        event.preventDefault();
-
-        deferredInstallPrompt =
-          event;
-
-        setTimeout(
-          () => {
-
-            if (
-              !localStorage.getItem(
-                "zxh_install_dismissed"
-              )
-            ) {
-              installPopup.classList.add(
-                "show"
-              );
-            }
-
-          },
-          5000
-        );
-      }
-    );
-
-
-    installLater.addEventListener(
-      "click",
-      () => {
-
-        installPopup.classList.remove(
-          "show"
-        );
-
-        localStorage.setItem(
-          "zxh_install_dismissed",
-          "1"
-        );
-      }
-    );
-
-
-    installNow.addEventListener(
-      "click",
-      async () => {
-
-        if (!deferredInstallPrompt) {
-
-          showToast(
-            "Use your browser's Add to Home Screen option."
-          );
-
-          installPopup.classList.remove(
-            "show"
-          );
-
-          return;
+    /* On every fresh load — clear input (unless ?mf= present) */
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (!params.get("mf")) {
+          urlInput.value = "";
+          currentOriginalUrl = "";
+          updateClearButton();
         }
+      }, 100);
+    });
 
-        deferredInstallPrompt.prompt();
+    /* PWA INSTALL POPUP */
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      setTimeout(() => {
+        if (!localStorage.getItem("zxh_install_dismissed")) {
+          installPromptOverlay.classList.add("show");
+        }
+      }, 5000);
+    });
 
+    window.dismissInstallPrompt = function () {
+      installPromptOverlay.classList.remove("show");
+      localStorage.setItem("zxh_install_dismissed", "1");
+    };
+
+    window.triggerInstall = async function () {
+      if (!deferredInstallPrompt) {
+        showToast("Use your browser's Add to Home Screen option.");
+        window.dismissInstallPrompt();
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      try { await deferredInstallPrompt.userChoice; } catch {}
+      deferredInstallPrompt = null;
+      window.dismissInstallPrompt();
+    };
+
+    installPromptOverlay.addEventListener("click", (e) => {
+      if (e.target === installPromptOverlay) window.dismissInstallPrompt();
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredInstallPrompt = null;
+      installPromptOverlay.classList.remove("show");
+      showToast("ZXH OFFICIAL installed");
+    });
+
+    /* SERVICE WORKER */
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
         try {
-          await deferredInstallPrompt.userChoice;
-        } catch {}
-
-        deferredInstallPrompt =
-          null;
-
-        installPopup.classList.remove(
-          "show"
-        );
-      }
-    );
-
-
-    window.addEventListener(
-      "appinstalled",
-      () => {
-
-        deferredInstallPrompt =
-          null;
-
-        installPopup.classList.remove(
-          "show"
-        );
-
-        showToast(
-          "ZXH OFFICIAL installed"
-        );
-      }
-    );
-
-
-    /* ==================================================
-       SERVICE WORKER
-    ================================================== */
-
-    if (
-      "serviceWorker" in navigator
-    ) {
-
-      window.addEventListener(
-        "load",
-        async () => {
-
-          try {
-
-            const registration =
-              await navigator.serviceWorker.register(
-                "/sw.js"
-              );
-
-            activeServiceWorker =
-              registration;
-
-            if (
-              registration.waiting
-            ) {
-              updateBanner.classList.add(
-                "show"
-              );
-            }
-
-            registration.addEventListener(
-              "updatefound",
-              () => {
-
-                const newWorker =
-                  registration.installing;
-
-                if (!newWorker) {
-                  return;
-                }
-
-                newWorker.addEventListener(
-                  "statechange",
-                  () => {
-
-                    if (
-                      newWorker.state ===
-                      "installed" &&
-                      navigator.serviceWorker.controller
-                    ) {
-                      updateBanner.classList.add(
-                        "show"
-                      );
-                    }
-
-                  }
-                );
+          const registration = await navigator.serviceWorker.register("/sw.js");
+          activeServiceWorker = registration;
+          if (registration.waiting) updateBanner.classList.add("show");
+          registration.addEventListener("updatefound", () => {
+            const newWorker = registration.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                updateBanner.classList.add("show");
               }
-            );
-
-          } catch (error) {
-
-            console.warn(
-              "ZXH Service Worker registration failed:",
-              error
-            );
-
-          }
+            });
+          });
+        } catch (error) {
+          console.warn("ZXH Service Worker registration failed:", error);
         }
-      );
+      });
     }
 
-
-    /* ==================================================
-       SERVICE WORKER UPDATE
-    ================================================== */
-
-    updateBtn.addEventListener(
-      "click",
-      () => {
-
-        if (
-          activeServiceWorker &&
-          activeServiceWorker.waiting
-        ) {
-
-          activeServiceWorker.waiting.postMessage({
-            type: "SKIP_WAITING"
-          });
-
-        } else {
-
-          window.location.reload();
-
-        }
-      }
-    );
-
-    navigator.serviceWorker?.addEventListener(
-      "controllerchange",
-      () => {
+    updateBtn.addEventListener("click", () => {
+      if (activeServiceWorker && activeServiceWorker.waiting) {
+        activeServiceWorker.waiting.postMessage({ type: "SKIP_WAITING" });
+      } else {
         window.location.reload();
       }
-    );
+    });
 
+    navigator.serviceWorker?.addEventListener("controllerchange", () => {
+      window.location.reload();
+    });
 
-    /* ==================================================
-       KEYBOARD SHORTCUT
-    ================================================== */
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "/" &&
-          document.activeElement !== urlInput
-        ) {
-
-          event.preventDefault();
-
-          urlInput.focus();
-        }
-
-        if (
-          event.key === "Escape" &&
-          document.activeElement === urlInput
-        ) {
-
-          urlInput.blur();
-        }
+    /* KEYBOARD */
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "/" && document.activeElement !== urlInput) {
+        event.preventDefault();
+        urlInput.focus();
       }
-    );
-
-
-    /* ==================================================
-       CLEAN URL AFTER NORMAL VISIT
-    ================================================== */
-
-    window.addEventListener(
-      "pageshow",
-      () => {
-
-        const params =
-          new URLSearchParams(
-            window.location.search
-          );
-
-        if (!params.has("mf")) {
-          currentOriginalUrl = "";
-        }
+      if (event.key === "Escape" && document.activeElement === urlInput) {
+        urlInput.blur();
       }
-    );
+    });
 
   </script>
-
 </body>
-</html>
+  </html>
