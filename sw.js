@@ -1,9 +1,11 @@
-const CACHE_NAME = "zxh-mdfire-v1";
+const CACHE_NAME = "zxh-mdfire-v2";
 
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/manifest.json"
+  "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png"
 ];
 
 
